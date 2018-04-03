@@ -1,0 +1,119 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{minted}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage{geometry}
+%\geometry{left=5cm,right=5cm,top=2.5cm,bottom=2.5cm}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{minted}
+\usepackage[slantfont,boldfont]{xeCJK}
+\setCJKmainfont{SimSun}
+%% \usepackage{indentfirst}
+%% \setlength{\parindent}{2em}
+\usepackage{float}
+\usepackage{titling}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage[square,sort,comma,numbers]{natbib}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage{url}
+\setCJKmonofont{SimHei}
+\input zhwinfonts
+\setlength{\bibsep}{0.5ex}
+
+\titleformat{\section}{\normalsize\bfseries}{}{0em}{}
+\titlespacing{\section}{0pt}{1em}{0em}
+
+\pretitle{\begin{center}\LARGE}
+\posttitle{\par\end{center}\vskip 0.5em}
+\preauthor{\vspace{8cm}\begin{center}
+    \large \lineskip0.5em %
+    \begin{tabular}[t]{c}}
+\postauthor{\end{tabular}\par\end{center}}
+\predate{\begin{center}\large}
+\postdate{\par\end{center}}
+
+\begin{document}
+
+\title{{\bf\Huge Analysis of Different Implementations of Bitmap Index}}
+\author{\emph{Harbin Institute of Technology}\\\emph{Department of Computer Science and Technology}\\Ma Yukun\\1150310618}
+
+\date{2017/11/18}
+
+\nocite{*}
+
+%% \maketitle\setcounter{page}{0}\thispagestyle{empty}
+%% \newpage
+%% \tableofcontents
+
+\begin{center}
+{\textbf{
+Yukun Ma\\
+Week \#3: Data and Metadata\\
+Page \#1}}
+\end{center}
+
+\section{Problem Statement}
+
+I will describe data and metadata, evaluate the differences between data and metadata and show how they are manipulated in DBMS.
+
+
+\bibliographystyle{unsrt}
+\bibliography{ref}
+
+\section{Overview of Data and Metadata}
+
+In computer science, data is any sequence of one or more symbols given meaning by specific act(s) of interpretation. And it requires interpretation to become information. \cite{data_wiki} While the metadata is "data that provides information about other data" \cite{metadata_wiki}. And it is well-organized information.
+
+In DBMS\footnote{DataBase Management System}, data is saved in a table by using data structures like B+ Trees. One can use DML\footnote{Data Manipulation Language (e.g., \mintinline{sql}{SELECT * FROM STUDENT}: pick all the data from table ``STUDENT'')} to manipulate(add、delete or update) the data in a database. While for the metadata, one should use DDL\footnote{Data Definition Language (e.g., \mintinline{sql}{DROP TABLE STUDENT}: delete the table ``STUDENT'' and all the data in it)} to manipulate it.
+
+\section{Critical Thinking}
+
+\begin{table}[H]
+\centering
+\caption{The Differences Between Data and Metadata}\label{tab:diff}
+\begin{tabular}{lcc}
+  \toprule
+   &Data &Metadata\\
+  \midrule
+  What is? &a set of symbols &data about data\\
+  Informative? &maybe(needs interpretation) &always\\
+  Manipulation Language &DML &DDL\\
+  Example &column names &scores of students\\
+  Amount &huge &smaller\\
+  \bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+
+\begin{center}
+{\textbf{
+Page \#2}}
+\end{center}
+
+\section{Question}
+
+By using metadata and other data, can we check the validity of some data? If we can, how to do it?
+
+\section{Method}
+
+{\emph{Describe how you are going to answer your own question stated above.}}
+
+\section{Analysis and Discussion}
+
+I think it is difficult for us to be very confident in the verification of data. But I think we can check the validity of the data at least to a certain degree in most cases.
+
+For example, when dealing with a column with a column name ``Precipitation''. We can not confirm that every item in that column is accurate. But we can be certainly sure that every item must be a number although it may be expressed in scientific notation or ends with different units of measure such as ``cm'' or ``mm''.
+
+We can check the validity of data with or without other data. When doing it without other data, we can only use our knowledge and the limits made through metadata to validate the data. Limits can be formats(e.g., initializing with ``\#'' and ending with a number), ranges(e.g., normal human body temperature is between 36 degrees Celsius and 38 degrees Celsius), etc.
+
+While when doing that with other data, things are getting interesting. We can deduce a lot of interesting limits on the data from other data. For example, if one's current state is Georgia, then the city he is currently in cannot be New York. But which one is not correct? Georgia or New York? Of course, it can be further analyzed. But it needs inference and induction which are not so simple to me and to computer.
+
+I believe it can be solved more elegantly by using deep learning. We can just use some data that we can totally trust to train the neural networks. And then we use the networks to pick the unauthenticated data.
+
+%% \renewcommand\refname{Reference}
+\end{document}

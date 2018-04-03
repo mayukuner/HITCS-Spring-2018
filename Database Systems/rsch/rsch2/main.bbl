@@ -1,0 +1,16 @@
+\begin{thebibliography}{1}
+
+\bibitem{cp_wiki}
+Wikipedia.
+\newblock Connection pool - wikipedia.
+\newblock \url{https://en.wikipedia.org/wiki/Connection_pool}.
+\newblock Accessed March 21, 2018.
+
+\bibitem{pool_sz}
+Brett Wooldridge.
+\newblock About pool sizing.
+\newblock
+  \url{https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing}.
+\newblock Accessed March 21, 2018.
+
+\end{thebibliography}
