@@ -1,0 +1,125 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{minted}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage{geometry}
+%\geometry{left=5cm,right=5cm,top=2.5cm,bottom=2.5cm}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{minted}
+\usepackage[slantfont,boldfont]{xeCJK}
+\setCJKmainfont{SimSun}
+%% \usepackage{indentfirst}
+%% \setlength{\parindent}{2em}
+\usepackage{float}
+\usepackage{titling}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage[square,sort,comma,numbers]{natbib}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage{url}
+\setCJKmonofont{SimHei}
+\input zhwinfonts
+\setlength{\bibsep}{0.5ex}
+
+\titleformat{\section}{\normalsize\bfseries}{}{0em}{}
+\titlespacing{\section}{0pt}{1em}{0em}
+
+\pretitle{\begin{center}\LARGE}
+\posttitle{\par\end{center}\vskip 0.5em}
+\preauthor{\vspace{8cm}\begin{center}
+    \large \lineskip0.5em %
+    \begin{tabular}[t]{c}}
+\postauthor{\end{tabular}\par\end{center}}
+\predate{\begin{center}\large}
+\postdate{\par\end{center}}
+
+\begin{document}
+
+\title{{\bf\Huge Analysis of Different Implementations of Bitmap Index}}
+\author{\emph{Harbin Institute of Technology}\\\emph{Department of Computer Science and Technology}\\Ma Yukun\\1150310618}
+
+\date{2017/11/18}
+
+\nocite{*}
+
+%% \maketitle\setcounter{page}{0}\thispagestyle{empty}
+%% \newpage
+%% \tableofcontents
+
+\begin{center}
+{\textbf{
+Yukun Ma\\
+Week \#6: Data Modeling\\
+Page \#1}}
+\end{center}
+
+\section{Problem Statement}
+
+Data modeling is the process of creating a data model by using some techniques.\cite{wiki} The techniques used in this process can be various including IE\footnote{Information Engineering}, IDEF1X\footnote{Integration DEFinition for information modeling}, UML\footnote{Unified Modeling Language}, and E-R Diagram\footnote{Entiy-Relation Diagram}.
+
+This article will evaluate these different methods of data modeling and then try to state the differences between them.
+
+\bibliographystyle{unsrt}
+\bibliography{ref}
+
+\section{Overview of Data Modeling}
+
+As stated before, data modeling is the process of creating a data model. Data modeling is a very helpful scratch when people from different fields want to understand or share the design and concepts of the database. A data model can be conceptual, logical, or physical. Conceptual data models are more about concepts, while physical model pays more attention to implementation.
+
+There are various techniques that can be used in data modeling. And IE, IDEF1X, UML, and E-R Diagram are the most commonly used among those techniques.
+
+
+\section{Critical Thinking}
+
+%%\footnotetext[3]{data in OLAP systems is from OLTP systems}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+\begin{table}[H]
+\centering
+\caption{The Differences Between OLTP and OLAP}\label{tab:diff}
+\begin{tabular}{lcc}
+  \toprule
+   &OLTP &OLAP\\
+  \midrule
+  IE &traditional relational database &data warehouse system\\
+  IDEF1X &consolidation data\\ %%\footnotemark[3]\\
+  UML &daily transaction processing &mining useful information\\
+  E-R Diagram &short and piecemeal &\tabincell{c}{time-consuming and\\ acting on lots of data}\\
+  \bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+
+\begin{center}
+{\textbf{
+Page \#2}}
+\end{center}
+
+\section{Question}
+
+When I looked up for the information of OLTP and OLAP, I saw some implementation details of OLAP. OLAP is implemented in a variety of ways, such as MOLAP, ROLAP, and HOLAP. So what are MOLAP, ROLAP, and HOLAP? What is the difference between them? Which implementation method to use?
+
+\section{Method}
+
+{\emph{Describe how you are going to answer your own question stated above.}}
+
+\section{Analysis and Discussion}
+
+MOLAP is Multidimensional OLAP. In MOLAP, data is indexed directly into a multidimensional database. So what is a multidimensional database? A multidimensional database is a database in which all data is stored in an array for the user. In this way, users can obtain a high-dimensional cube in this multidimensional data by adding multi-dimensional constraints. For example, the user queries cities where annual precipitation is between 500 and 700, latitude is between 30 degrees and 50 degrees north latitude, and longitude is between 90 degrees and 110 degrees east longitude. Due to the use of fast indexing, MOLAP's time efficiency is very high. However, because the data in high-dimensional cubes may be sparse, the space efficiency is relatively poor.
+
+The full spelling of ROLAP is Relational Online Analytical Processing. As you can guess from the name, ROLAP is an OLAP built on a relational database. When using ROLAP, the system converts the query to a SQL statement and executes it on a relational database. For the problem of city selection just now, ROLAP adds a few "WHERE". Because it is built on a relational database, ROLAP is very space efficient, but time efficiency is not as high as MOLAP.
+
+HOLAP is Hybrid OLAP, which is a strategy that combines the previously mentioned MOLAP and ROLAP. For a rough query (for example, the number of cities that meet the requirements), HOLAP uses MOLAP to query high-dimensional cubes. However, when you need to query more detailed information (such as the name of each city), you need to use the underlying relational database to query.
+
+%% MOLAP就是Multidimensional OLAP。在MOLAP中,数据直接索引到多维数据库中。那么什么是多维数据库呢？多维数据库是一种对于用户而言所有数据都储存在数组中的数据库。这样，用户可以通过添加多维的限制，来获得这个多维数据中的一个高维立方体。例如用户查询年降水量在500到700，纬度在北纬30度到50度且经度在东经90度到110度之间的城市。由于使用了快速索引，因此MOLAP的时间效率非常高。然而由于高维立方体中的数据可能比较稀疏，空间效率比较差。
+
+%% 而ROLAP的完整拼写为Relational Online Analytical Processing。从名字可以猜出，ROLAP是建立在关系型数据库上的OLAP。在使用ROLAP时，系统会将查询转化为sql语句，在关系型数据库上执行。对于刚才的城市选择问题，对ROLAP来说就是加几条“WHERE”。由于建立在关系型数据库上，因此ROLAP对空间的利用率非常高，但是时间效率就没有MOLAP那么高了。
+
+%% HOLAP就是Hybrid OLAP，也就是将前面提到的MOLAP和ROLAP混合起来的一种策略。对于粗略的查询（例如符合要求的城市的个数），HOLAP会使用MOLAP查询出高维立方体。然而，当需要查询更详细的信息时（如每个城市的名字），就需要使用底层的关系层数据库来查询。
+
+
+%% \renewcommand\refname{Reference}
+\end{document}
