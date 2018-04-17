@@ -1,0 +1,110 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{minted}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage{geometry}
+%\geometry{left=5cm,right=5cm,top=2.5cm,bottom=2.5cm}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{minted}
+\usepackage[slantfont,boldfont]{xeCJK}
+\setCJKmainfont{SimSun}
+%% \usepackage{indentfirst}
+%% \setlength{\parindent}{2em}
+\usepackage{float}
+\usepackage{titling}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage[square,sort,comma,numbers]{natbib}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage{url}
+\setCJKmonofont{SimHei}
+\input zhwinfonts
+\setlength{\bibsep}{0.5ex}
+
+\titleformat{\section}{\normalsize\bfseries}{}{0em}{}
+\titlespacing{\section}{0pt}{1em}{0em}
+
+\pretitle{\begin{center}\LARGE}
+\posttitle{\par\end{center}\vskip 0.5em}
+\preauthor{\vspace{8cm}\begin{center}
+    \large \lineskip0.5em %
+    \begin{tabular}[t]{c}}
+\postauthor{\end{tabular}\par\end{center}}
+\predate{\begin{center}\large}
+\postdate{\par\end{center}}
+
+\begin{document}
+
+\title{{\bf\Huge Analysis of Different Implementations of Bitmap Index}}
+\author{\emph{Harbin Institute of Technology}\\\emph{Department of Computer Science and Technology}\\Ma Yukun\\1150310618}
+
+\date{2017/11/18}
+
+\nocite{*}
+
+%% \maketitle\setcounter{page}{0}\thispagestyle{empty}
+%% \newpage
+%% \tableofcontents
+
+\begin{center}
+{\textbf{
+Yukun Ma\\
+Week \#6: Data Modeling\\
+Page \#1}}
+\end{center}
+
+\section{Problem Statement}
+
+
+
+\bibliographystyle{unsrt}
+\bibliography{ref}
+
+\section{Overview of Data Modeling}
+
+
+\section{Critical Thinking}
+
+%%\footnotetext[3]{data in OLAP systems is from OLTP systems}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+\begin{table}[H]
+\centering
+\caption{The Differences Between IE, IDEF1X, UML, and E-R Diagram}\label{tab:diff}
+\begin{tabular}{lccc}
+  \toprule
+  \emph{Method} &\emph{Entities} &\emph{Attributes} &\emph{Relationships}\\
+  \midrule
+  IE &square-cornered rectangles &null &solid lines; no FKs\\
+  IDEF1X &\tabincell{c}{sqaure-cornered or\\ round-cornered rectangles} &null &solid or dashed lines\\ %%\footnotemark[3]\\
+  UML &square-cornered rectangles &inside entity boxes &solid lines\\
+  E-R Diagram &squared-cornered rectangle &\tabincell{c}{in circles outside\\ entity boxes} & rhombus symbol\\
+  \bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+
+\begin{center}
+{\textbf{
+Page \#2}}
+\end{center}
+
+\section{Question}
+
+When I looked up for the information of data modeling, I found there are 3 types of data models, namely conceptual data models, logical data models, and physical data models.\cite{wiki}.
+
+What are these three kinds of data models and under what circumstances should we use each of them?
+
+\section{Method}
+
+{\emph{Describe how you are going to answer your own question stated above.}}
+
+\section{Analysis and Discussion}
+
+
+
+%% \renewcommand\refname{Reference}
+\end{document}

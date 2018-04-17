@@ -1,0 +1,121 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{minted}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage{geometry}
+%\geometry{left=5cm,right=5cm,top=2.5cm,bottom=2.5cm}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{minted}
+\usepackage[slantfont,boldfont]{xeCJK}
+\setCJKmainfont{SimSun}
+%% \usepackage{indentfirst}
+%% \setlength{\parindent}{2em}
+\usepackage{float}
+\usepackage{titling}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage[square,sort,comma,numbers]{natbib}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage{url}
+\setCJKmonofont{SimHei}
+\input zhwinfonts
+\setlength{\bibsep}{0.5ex}
+
+\titleformat{\section}{\normalsize\bfseries}{}{0em}{}
+\titlespacing{\section}{0pt}{1em}{0em}
+
+\pretitle{\begin{center}\LARGE}
+\posttitle{\par\end{center}\vskip 0.5em}
+\preauthor{\vspace{8cm}\begin{center}
+    \large \lineskip0.5em %
+    \begin{tabular}[t]{c}}
+\postauthor{\end{tabular}\par\end{center}}
+\predate{\begin{center}\large}
+\postdate{\par\end{center}}
+
+\begin{document}
+
+\title{{\bf\Huge Analysis of Different Implementations of Bitmap Index}}
+\author{\emph{Harbin Institute of Technology}\\\emph{Department of Computer Science and Technology}\\Ma Yukun\\1150310618}
+
+\date{2017/11/18}
+
+\nocite{*}
+
+%% \maketitle\setcounter{page}{0}\thispagestyle{empty}
+%% \newpage
+%% \tableofcontents
+
+\begin{center}
+{\textbf{
+Yukun Ma\\
+Week \#7: NoSQL Data Stores\\
+Page \#1}}
+\end{center}
+
+\section{Problem Statement}
+
+Nosql data stores are very popular these days.
+
+\bibliographystyle{unsrt}
+\bibliography{ref}
+
+\section{Overview of Data Modeling}
+
+As stated before, data modeling is the process of creating a data model. Data modeling is a very helpful scratch when people from different fields want to understand or share the design and concepts of the database.
+
+There are various techniques that can be used in data modeling. And IE\footnote{Information Engineering}, IDEF1X\footnote{Integration DEFinition for information modeling}, UML\footnote{Unified Modeling Language}, and E-R Diagram\footnote{Entiy-Relation Diagram} are the most commonly used among those techniques.
+
+
+\section{Critical Thinking}
+
+%%\footnotetext[3]{data in OLAP systems is from OLTP systems}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+\begin{table}[H]
+\centering
+\caption{The Differences Between IE, IDEF1X, UML, and E-R Diagram}\label{tab:diff}
+\begin{tabular}{lccc}
+  \toprule
+  \emph{Method} &\emph{Entities} &\emph{Attributes} &\emph{Relationships}\\
+  \midrule
+  IE &square-cornered rectangles &null &solid lines; no FKs\\
+  IDEF1X &\tabincell{c}{sqaure-cornered or\\ round-cornered rectangles} &null &solid or dashed lines\\ %%\footnotemark[3]\\
+  UML &square-cornered rectangles &inside entity boxes &solid lines\\
+  E-R Diagram &squared-cornered rectangle &\tabincell{c}{in circles outside\\ entity boxes} & rhombus symbol\\
+  \bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+
+\begin{center}
+{\textbf{
+Page \#2}}
+\end{center}
+
+\section{Question}
+
+When I looked up for the information of data modeling, I found there are 3 types of data models, namely conceptual data models, logical data models, and physical data models.\cite{wiki}.
+
+What are these three kinds of data models and under what circumstances should we use each of them?
+
+\section{Method}
+
+{\emph{Describe how you are going to answer your own question stated above.}}
+
+\section{Analysis and Discussion}
+
+Among the three kinds of data models, the conceptual data models are the most high-level one. It hides the detailed information of database that users want. They usually include the important entities and the relationships among them. But in a conceptual data model, neither attribute nor primary key is specified.
+
+While for a logical data model, things are getting more detailed. A logical data model will describe the data in the database as exhaustively as possible but do not care how to implement. It contains all entities and relationships among the entities. Compared with the conceptual data model, a logical data model will specify all the attributes primary keys, foreign keys, and so on.
+
+A physical data model will not only describe the data in the database in detail, but also will show how the database will be built. Apart from all the information that a logical data model provides, a physical data model will specify all table names, column names, and column types. It is the most detailed among the three kinds data models above.
+
+When we only need to have a general understanding of the concept and structure of the database, we can use the conceptual data model. A conceptual data model is usually the draft of the design of database. Usually we need a more detailed design so that we can evaluate and analyze the rationality and correctness of our design. That's we we should use a logical data model. And before we impelment our design, we should get a physical data model.
+
+
+%% \renewcommand\refname{Reference}
+\end{document}
