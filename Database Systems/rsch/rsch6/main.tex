@@ -58,36 +58,27 @@ Page \#1}}
 
 \section{Problem Statement}
 
-Nosql data stores are very popular these days.
+NoSQL data stores are very popular these days. This article will show why they are so popular. This article will also discuss on the problems that nosql data stores can solve while the relational databases cannot.
 
 \bibliographystyle{unsrt}
 \bibliography{ref}
 
-\section{Overview of Data Modeling}
+\section{Overview of NoSQL Data Stores}
 
-As stated before, data modeling is the process of creating a data model. Data modeling is a very helpful scratch when people from different fields want to understand or share the design and concepts of the database.
+NoSQL data stores are data stores that is modeled not in tabular relations which are used in relational databases.\cite{wiki} If they are not modeled in tabular relations, then what are the structure of data stored in a NoSQL data store?
 
-There are various techniques that can be used in data modeling. And IE\footnote{Information Engineering}, IDEF1X\footnote{Integration DEFinition for information modeling}, UML\footnote{Unified Modeling Language}, and E-R Diagram\footnote{Entiy-Relation Diagram} are the most commonly used among those techniques.
-
+There are several types of data models used by nosql data stores. For example, key-value model is one of the simplest model used in NoSQL data stores.\cite{wiki} And NoSQL data stores that use key-value models are called key-value stores. Similarly, there are document stores, graph databases, object databases and so on.
 
 \section{Critical Thinking}
 
-%%\footnotetext[3]{data in OLAP systems is from OLTP systems}
-\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
-\begin{table}[H]
-\centering
-\caption{The Differences Between IE, IDEF1X, UML, and E-R Diagram}\label{tab:diff}
-\begin{tabular}{lccc}
-  \toprule
-  \emph{Method} &\emph{Entities} &\emph{Attributes} &\emph{Relationships}\\
-  \midrule
-  IE &square-cornered rectangles &null &solid lines; no FKs\\
-  IDEF1X &\tabincell{c}{sqaure-cornered or\\ round-cornered rectangles} &null &solid or dashed lines\\ %%\footnotemark[3]\\
-  UML &square-cornered rectangles &inside entity boxes &solid lines\\
-  E-R Diagram &squared-cornered rectangle &\tabincell{c}{in circles outside\\ entity boxes} & rhombus symbol\\
-  \bottomrule
-\end{tabular}
-\end{table}
+Let's compare NoSQL data stores with relational databases on the problems that NoSQL data stores can solve while relational databases cannot.
+
+First, NoSQL data stores can free people from design predefined schema. While users of relational databases must define the schema first before add any information to the database.\cite{diff}
+
+Second, NoSQL data stores can deal with the unstructured data such as videos, audios and email which makes up much of data on the Internet todays. While, relational databases can only handle structured data.\cite{diff}
+
+Finally, NoSQL data stores is much easier to ``horizontal'' scaling to clusters of servers than relational databases due to the simpler design of the NoSQL data stores.\cite{wiki}
+
 
 \newpage
 
@@ -98,9 +89,7 @@ Page \#2}}
 
 \section{Question}
 
-When I looked up for the information of data modeling, I found there are 3 types of data models, namely conceptual data models, logical data models, and physical data models.\cite{wiki}.
 
-What are these three kinds of data models and under what circumstances should we use each of them?
 
 \section{Method}
 

@@ -1,0 +1,16 @@
+\begin{thebibliography}{1}
+
+\bibitem{wiki}
+Wikipedia.
+\newblock Nosql - wikipedia.
+\newblock \url{https://en.wikipedia.org/wiki/NoSQL}.
+\newblock Accessed April 19, 2018.
+
+\bibitem{diff}
+David~C. Hay.
+\newblock A comparison of data modeling techniques.
+\newblock
+  \url{http://www.essentialstrategies.com/publications/modeling/compare.htm}.
+\newblock Accessed April 5, 2018.
+
+\end{thebibliography}
