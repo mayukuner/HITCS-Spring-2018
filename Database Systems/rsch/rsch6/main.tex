@@ -52,13 +52,13 @@
 \begin{center}
 {\textbf{
 Yukun Ma\\
-Week \#7: NoSQL Data Stores\\
+Week \#8: NoSQL Data Stores\\
 Page \#1}}
 \end{center}
 
 \section{Problem Statement}
 
-NoSQL data stores are very popular these days. This article will show why they are so popular. This article will also discuss on the problems that nosql data stores can solve while the relational databases cannot.
+NoSQL data stores are very popular these days. This article will show why they are so popular. Then we will also discuss on the problems that nosql data stores can solve while the relational databases cannot.
 
 \bibliographystyle{unsrt}
 \bibliography{ref}
@@ -89,7 +89,9 @@ Page \#2}}
 
 \section{Question}
 
+When I looked up for the different types of NoSQL data stores, I found there is a type of data store that is named tabular store. Unlike the other NoSQL data stores such as key-value stores and document stores that are very different from traditional relational databases, a tabular store like Apache HBase manages data as a table just like relational databases do.
 
+So why are tabular stores not relational databases but NoSQL data stores? And what's the advantages of a tabular store?
 
 \section{Method}
 
@@ -97,13 +99,10 @@ Page \#2}}
 
 \section{Analysis and Discussion}
 
-Among the three kinds of data models, the conceptual data models are the most high-level one. It hides the detailed information of database that users want. They usually include the important entities and the relationships among them. But in a conceptual data model, neither attribute nor primary key is specified.
+HBase is a database that is built on HDFS\footnote{Hadoop Distributed File System, which is a file system that is well suited for distributed environment that is commonly used in clusters of servers nowadays. Many famous framework like Hadoop, Spark and HBase are built on it.}. It has very different concepts of processing, retrieving and storing the data or information than a relational database. First, it is column-oriented while most relational database management systems are row-oriented. And tables in HBase can be treated as inputs and outputs for MapReduce\footnote{A programming model that can be used when processing big data using distributed environment.} jobs on the Hadoop framework, which is very different from using SQL on relational databases.
 
-While for a logical data model, things are getting more detailed. A logical data model will describe the data in the database as exhaustively as possible but do not care how to implement. It contains all entities and relationships among the entities. Compared with the conceptual data model, a logical data model will specify all the attributes primary keys, foreign keys, and so on.
+Let's talk about the advantages of HBase. Most importantly, HBase can be easily horizontally scaled. That means HBase based on HDFS can be used on distributed environment like a cluster of machines. And it deals with sparse tables well. Also, HBase has flexible schema which, of course, is the common advantage that a NoSQL data store has.
 
-A physical data model will not only describe the data in the database in detail, but also will show how the database will be built. Apart from all the information that a logical data model provides, a physical data model will specify all table names, column names, and column types. It is the most detailed among the three kinds data models above.
-
-When we only need to have a general understanding of the concept and structure of the database, we can use the conceptual data model. A conceptual data model is usually the draft of the design of database. Usually we need a more detailed design so that we can evaluate and analyze the rationality and correctness of our design. That's we we should use a logical data model. And before we impelment our design, we should get a physical data model.
 
 
 %% \renewcommand\refname{Reference}

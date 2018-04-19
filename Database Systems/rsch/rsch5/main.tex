@@ -52,35 +52,42 @@
 \begin{center}
 {\textbf{
 Yukun Ma\\
-Week \#6: Data Modeling\\
+Week \#7: Data Exchange\\
 Page \#1}}
 \end{center}
 
 \section{Problem Statement}
 
+Data exchange is used when two programs or systems need to share some data. More formally, data exchange is the procedure when data is transforming into some schema from another schema.\cite{wiki}
 
+In this paper, the data exchange problems will be described and then the role that XML as well as JSON plays in these problems will be evaluated.
 
 \bibliographystyle{unsrt}
 \bibliography{ref}
 
-\section{Overview of Data Modeling}
+\section{Overview of Data Exchange}
 
+When the data need tranforming from a kind of schema to another schema, usually data exchange will be used.
+
+Let me take the data exchange in a web app as an example. Let's say a certain web app has a front-end page, it could be a page for users to log in or a page for users to create accounts. When users filled in the form out and then clicked the ``submit'' button, the front-end page should transfer the data that users just typed in to the backend to validate the account information or other information. But how to transfer the data? In AJAX\footnote{Asynchronous JavaScript and XML}, JSON and XML are usually used as a exchange format.
+
+Usually people use an exchange format or interchange format so that they can translate the data in the source schema to data in this form as a intermediate step. And XML and JSON described above can be used in this way.
 
 \section{Critical Thinking}
 
-%%\footnotetext[3]{data in OLAP systems is from OLTP systems}
+%\footnotetext[3]{}
 \newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
 \begin{table}[H]
 \centering
-\caption{The Differences Between IE, IDEF1X, UML, and E-R Diagram}\label{tab:diff}
-\begin{tabular}{lccc}
+\caption{The Differences Between XML and JSON}\label{tab:diff}
+\begin{tabular}{lcc}
   \toprule
-  \emph{Method} &\emph{Entities} &\emph{Attributes} &\emph{Relationships}\\
+   &XML &JSON\\
   \midrule
-  IE &square-cornered rectangles &null &solid lines; no FKs\\
-  IDEF1X &\tabincell{c}{sqaure-cornered or\\ round-cornered rectangles} &null &solid or dashed lines\\ %%\footnotemark[3]\\
-  UML &square-cornered rectangles &inside entity boxes &solid lines\\
-  E-R Diagram &squared-cornered rectangle &\tabincell{c}{in circles outside\\ entity boxes} & rhombus symbol\\
+  Encoding &slower &quicker\\
+  Decoding &hard &much easier\\
+  Weight &heavier &lighter\\            %%\footnotemark[3]\\
+  Popularity &more popular &\tabincell{c}{popular in AJAX}\\
   \bottomrule
 \end{tabular}
 \end{table}
@@ -94,9 +101,7 @@ Page \#2}}
 
 \section{Question}
 
-When I looked up for the information of data modeling, I found there are 3 types of data models, namely conceptual data models, logical data models, and physical data models.\cite{wiki}.
-
-What are these three kinds of data models and under what circumstances should we use each of them?
+In the application of web services, if we are transferring a huge amount of XML ,JSON or data in other format, how to speed up the process of the data exchange.
 
 \section{Method}
 
@@ -104,6 +109,11 @@ What are these three kinds of data models and under what circumstances should we
 
 \section{Analysis and Discussion}
 
+As a student developed writes sereral web apps, I think when we are dealing with a huge amount of data, the first thing we should think about is: Do we really need so huge amount of data being transferred in a web apps. We can use several techniques to reduce the amount of data in the data exchange. For example, we can make the frontend page to request data only when the current user have a change to see it. Let's say that a user is reading a very long page of article, we can request the currently visible passages of this article in this frontend page from the backend server. We can also divide this article to different pages.
+
+In addition to considering application design issues, there are actually other technologies that can help us reduce the amount of data transferred, thus increasing the speed of data exchange. HTTP compression is a method that web servers and clients can use to compress the HTTP requests and responses to improve the speed of data exchange.\cite{wiki2} When a server sends out a HTTP response (the HTTP response may contain HTML or JSON) to the client, it can use some HTTP compression method to compress the response to make the interchange data smaller in size. For example, gzip is a broadly used compression algorithm that can be used in HTTP compression. No matter the response is a JSON or not, the server just need to compress the content of the response and add ``Accept-Encoding: gzip, deflate'' to the header of the response. Then the client (browser) will automatically decompress the HTTP content and parse it in a way that the content should be parsed.
+
+In summary, we should first consider the design of web services. If the effect is not good, we can consider using HTTP compression technology to improve the efficiency of data exchange.
 
 
 %% \renewcommand\refname{Reference}
