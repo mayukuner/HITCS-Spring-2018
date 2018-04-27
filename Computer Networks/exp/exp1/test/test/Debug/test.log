@@ -1,0 +1,5 @@
+﻿  stdafx.cpp
+  test.cpp
+e:\hitcs-spring-2018\computer networks\exp\exp1\test\test\test.cpp(61): warning C4101: “dwThreadID”: 未引用的局部变量
+e:\hitcs-spring-2018\computer networks\exp\exp1\test\test\test.cpp(140): warning C4101: “clientAddr”: 未引用的局部变量
+  test.vcxproj -> E:\HITCS-Spring-2018\Computer Networks\exp\exp1\test\Debug\test.exe
