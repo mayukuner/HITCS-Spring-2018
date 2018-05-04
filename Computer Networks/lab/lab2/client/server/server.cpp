@@ -108,6 +108,24 @@ void ackHandler(char c) {
 		curAck = index + 1;
 	}
 }
+void receiveSR(SOCKET sockServer, SOCKADDR_IN addrClient) {	
+    //设置套接字为非阻塞模式
+    int iMode = 0; //1：非阻塞，0：阻塞
+    ioctlsocket(sockServer, FIONBIO, (u_long FAR*) &iMode);//非阻塞设置
+    char* buffer = new char[BUFFER_LENGTH];
+    int length;
+    int recvSize;
+    while (true) {
+        recvSize =
+            recvfrom(sockServer, buffer, BUFFER_LENGTH, 0, ((SOCKADDR*)&addrClient), &length);
+        printf("Data received from the client: %s\n", buffer);
+        Sleep(500);
+    }
+    //设置套接字为非阻塞模式
+    int iMode = 1; //1：非阻塞，0：阻塞
+    ioctlsocket(sockServer, FIONBIO, (u_long FAR*) &iMode);//非阻塞设置
+    delete[] buffer;
+}
 //主函数
 int main(int argc, char* argv[])
 {
@@ -275,7 +293,10 @@ int main(int argc, char* argv[])
 				}
 			}
 		}
-		sendto(sockServer, buffer, 1026, 0, (SOCKADDR*)&addrClient,
+        else if (strcmp(buffer, "-testsr") == 0) {
+            receiveSR(sockServer, addrClient);
+        }
+		sendto(sockServer, buffer, BUFFER_LENGTH, 0, (SOCKADDR*)&addrClient,
 			sizeof(SOCKADDR));
 		Sleep(500);
 	}
