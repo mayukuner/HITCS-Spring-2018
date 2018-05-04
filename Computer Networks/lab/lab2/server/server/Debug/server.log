@@ -1,0 +1,3 @@
+﻿  server.cpp
+e:\hitcs-spring-2018\computer networks\lab\lab2\server\server\server.cpp(203): warning C4309: “=”: 截断常量值
+  server.vcxproj -> E:\HITCS-Spring-2018\Computer Networks\lab\lab2\server\Debug\server.exe

@@ -1,0 +1,689 @@
+﻿HTTP/1.1 200 OK
+Date: Sat, 28 Apr 2018 04:38:48 GMT
+Via: 1.1 varnish
+Cache-Control: max-age=600
+Expires: Sat, 28 Apr 2018 03:25:11 GMT
+Age: 4
+Connection: keep-alive
+X-Served-By: cache-lax8639-LAX
+X-Cache: HIT
+X-Cache-Hits: 1
+X-Timer: S1524890329.904141,VS0,VE1
+Vary: Accept-Encoding
+X-Fastly-Request-ID: e0f86b845bd51d1d3baa2f5f15ee6ae4da2c5716
+
+
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      JURUO怎么写 &middot; qwertier's blog
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://blog.qwertier.cn/public/css/poole.css">
+  <link rel="stylesheet" href="http://blog.qwertier.cn/public/css/syntax.css">
+  <link rel="stylesheet" href="http://blog.qwertier.cn/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://blog.qwertier.cn/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="http://blog.qwertier.cn/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  
+  <script>
+    <!-- Google Analysis -->
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-71249886-1', 'auto');
+    ga('send', 'pageview');
+
+    <!-- Baidu Tongji -->
+    var _hmt = _hmt || [];
+    (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?ffd44cf799fcf1c866b950330e380a3c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>蒟蒻的学习思考</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="http://blog.qwertier.cn/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about/">About</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/archive/">Archive</a>
+        
+      
+    
+      
+    
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+          <a class="sidebar-nav-item" href="http://blog.qwertier.cn/rss.xml">RSS</a>
+
+    <a class="sidebar-nav-item" href="https://github.com/mayukuner/mayukuner.github.io/">GitHub project</a>
+    <a class="sidebar-nav-item" href="http://kugwzk.info/">酷狗的小窝</a>
+    <span class="sidebar-nav-item">Currently v3.14</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2017. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://blog.qwertier.cn/" title="Home">JURUO怎么写</a>
+            <small>qwertier's blog</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2017/12/15/white-test/">
+        自动生成白盒测试基本路径
+      </a>
+    </h1>
+
+    <span class="post-date">15 Dec 2017</span>
+
+    <p>题目链接：<a href="https://cms.hit.edu.cn/mod/assignment/view.php?id=8919">https://cms.hit.edu.cn/mod/assignment/view.php?id=8919</a></p>
+
+<p>注意事项有四条：</p>
+
+<ol>
+  <li>在查找基本路径时，采用深度优先搜索策略；若遇到判定节点，需遵循“先遍历false分支，再遍历true分支”的原则。</li>
+  <li>若某一条路径出现循环，即：该路径的后续部分已经在本路径之前出现过，则在进入循环的第一个节点处停止，后续部分不需要再包含在该路径中（例如1,2,3,9,10,2,3这样的路径，需简化为1,2,3,9,10,2即可）。</li>
+  <li>需根据“基本路径”的定义对每一条路径进行检查，看其中是否包含了之前其他路径中不曾出现过的边。若否，则将其去除；</li>
+  <li>若程序需要输出多条基本路径，按照路径长度由小到大排序输出；若两个路径的长度相等，则按相对应位置的数字大小由低到高排列（例如1,3,6,5和1,3,4,5两条路径，后者应该先输出；1,10,8,3,4和1,9,10,3,4两条路径，后者应该先输出）。</li>
+</ol>
+
+<p>值得注意的是，第二条中应该改为当某条路径遇到这条路径之前访问过的节点时，停止访问。</p>
+
+<p>我们先不考虑扩展要求，那么就可以得到一个简单的算法:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DFS(u):
+    if vis[u] = True 或者 u无出边
+        找到一条路径
+        return
+    vis[u] = True
+    按照先F分支后T分支的顺序遍历u的出边，设当前边指向的节点为v
+        DFS(v)
+    vis[u] = False
+</code></pre></div></div>
+
+<p>考虑扩展需求之后，加边时就有一点小trick。</p>
+
+<p><img src="http://blog.qwertier.cn/public/images/white-test/img1.png" alt="图片1" /></p>
+
+<p><img src="http://blog.qwertier.cn/public/images/white-test/img2.png" alt="图片2" /></p>
+
+<p>如果是AND关系，那么就会如上面两个图，靠上的图是分裂之前的样子，靠下的图是分裂之后的样子。</p>
+
+<p>可以看出所有指向2的节点现在需要指向2.1，所以我们可以给每个节点设一个节点对应的值。先不考虑扩展需求，生成图。然后把原来2号节点的值从2设为2.1，然后新建一个节点2.2，然后修改他们指向的边就可以了。</p>
+
+<p>这样这个题就完成了，逻辑比较简单，代码也不长（100+）。</p>
+
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2017/12/12/deploy-django-by-nginx/">
+        在Ubuntu上使用Nginx部署django
+      </a>
+    </h1>
+
+    <span class="post-date">12 Dec 2017</span>
+
+    <p>最终完成软工项目后，接下来就是项目的部署。由于在软工项目里，我们使用的是django，加上我们用的是我之前搞的阿里云服务器，搭载的系统是Ubuntu 16.04。因此这篇文章将会介绍如何在Ubuntu 16.04上部署django。</p>
+
+<h3 id="为什么要部署">为什么要部署</h3>
+
+<p>其实，看到有些（几乎所有）同学将django部署到服务器上时，仅仅是简单地用django自带的测试服务器打开，然后直接（或间接）用8000端口来从外部访问django应用，这样做的好处有两个：一是简单，二是容易调试。</p>
+
+<p>然而，在实际上的生产环境中，这样部署很容易出问题。django自带的测试服务器是单线程的，当多个用户访问的时候，性能就很差，这一个测试服务器挂掉应用就完蛋了。所以，使用Nginx部署势在必行。</p>
+
+<h3 id="部署步骤">部署步骤</h3>
+
+<p>简单地说，部署django，我们需要做的只有三步：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. 环境配置
+2. 安装、配置uwsgi来作为nginx和django的中间件
+3. 安装、配置nginx来作为服务器的最前端
+</code></pre></div></div>
+
+<p>最后达成的效果大约是这样的：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    用户 &lt;-&gt; nginx &lt;-&gt; uWSGI &lt;-&gt; Django
+</code></pre></div></div>
+
+<p>接下来就是具体的三步如何配置。</p>
+
+<h3 id="环境配置">环境配置</h3>
+
+<p>由于服务器是Ubuntu 16.04，自带了Python 2.7与Python 3.5。</p>
+
+<p>如果对python的版本不满意，可以用pyenv来管理不同版本的python，灵活切换环境，很爽（本人用pyenv装了python36）。</p>
+
+<p>一个大坑就是：如果用了pyenv，想保持当前python的环境，就不要用sudo语句了，不然pyenv就会失效。</p>
+
+<p>另外，就是django和各个依赖库的安装，注意版本号。</p>
+
+<p>简单用django自带的测试服务器测试一下是否能正常运行即可。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    python manage.py runserver 0.0.0.0:8000
+</code></pre></div></div>
+
+<h3 id="安装配置uwsgi">安装、配置uwsgi</h3>
+
+<p>uwsgi的安装也非常简单，用pip安装即可。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    pip install uwsgi
+</code></pre></div></div>
+
+<p>安装完uwsgi之后，可以使用如下语句测试uwsgi（到项目目录下，把下面的PROJECT替换成你的项目名）：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    uwsgi <span class="nt">--http</span> :8001 <span class="nt">--plugin</span> python <span class="nt">--module</span> PROJECT.wsgi
+</code></pre></div></div>
+
+<p>然后看能否正常访问项目。</p>
+
+<p>接下来我们写uwsgi的配置文件（我们项目的配置文件，仅供参考）：</p>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nn">[uwsgi]</span>
+    <span class="c"># Django-related settings
+</span>    <span class="c">#plugins = python3
+</span>    <span class="py">socket</span> <span class="p">=</span> <span class="s">:8001</span>
+
+    <span class="c"># the base directory (full path)
+</span>    <span class="py">chdir</span>           <span class="p">=</span> <span class="s">/root/Friend-Reader</span>
+
+    <span class="c"># Django s wsgi file
+</span>    <span class="py">module</span>          <span class="p">=</span> <span class="s">FriendReader.wsgi</span>
+
+    <span class="c"># process-related settings
+</span>    <span class="c"># master
+</span>    <span class="py">master</span>          <span class="p">=</span> <span class="s">true</span>
+
+    <span class="c"># maximum number of worker processes
+</span>    <span class="py">processes</span>       <span class="p">=</span> <span class="s">4</span>
+
+    <span class="c"># ... with appropriate permissions - may be needed
+</span>    <span class="py">chmod-socket</span>    <span class="p">=</span> <span class="s">777</span>
+    <span class="c"># clear environment on exit
+</span>    <span class="py">vacuum</span>          <span class="p">=</span> <span class="s">true</span>
+    <span class="py">buffer-size</span> <span class="p">=</span> <span class="s">32768</span>
+</code></pre></div></div>
+
+<p>如上，项目文件夹在/root/Friend-Reader，项目名为FriendReader，因此/root/Friend-Reader/FriendReader/下有个wsgi.py文件。</p>
+
+<p>如下语句即可在后台运行uwsgi:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    uwsgi <span class="nt">--ini</span> uwsgi.ini
+</code></pre></div></div>
+
+<h3 id="安装配置nginx">安装、配置nginx</h3>
+
+<p>nginx的安装十分简单，只需要用apt-get即可。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">sudo </span>apt-get install nginx
+</code></pre></div></div>
+
+<p>这时候打开服务器地址，应该会看到nginx的欢迎页面。</p>
+
+<p><img src="http://blog.qwertier.cn/public/images/deploy-django-by-nginx/nginx.png" alt="好友设置" /></p>
+
+<p>好，接下来配置nginx，打开/etc/nginx/nginx.conf，在http那个大括号里，我们加上这段：</p>
+
+<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">server</span> {
+        <span class="c"># the port your site will be served on
+</span>        <span class="n">listen</span>      <span class="m">80</span>;
+        <span class="c"># the domain name it will serve for
+</span>        <span class="n">server_name</span> <span class="n">reader</span>.<span class="n">qwertier</span>.<span class="n">cn</span>; <span class="c"># substitute your machine's IP address or FQDN
+</span>        <span class="n">charset</span>     <span class="n">utf</span>-<span class="m">8</span>;
+        
+        <span class="c"># max upload size
+</span>        <span class="n">client_max_body_size</span> <span class="m">75</span><span class="n">M</span>;   <span class="c"># adjust to taste
+</span>        
+        <span class="c"># Django media
+</span>        <span class="n">location</span> /<span class="n">media</span>  {
+            <span class="n">alias</span> /<span class="n">root</span>/<span class="n">Friend</span>-<span class="n">Reader</span>/<span class="n">media</span>;  <span class="c"># your Django project's media files - amend as required
+</span>        }
+        
+        <span class="n">location</span> /<span class="n">static</span> {
+            <span class="n">alias</span> /<span class="n">root</span>/<span class="n">Friend</span>-<span class="n">Reader</span>/<span class="n">static</span>; <span class="c"># your Django project's static files - amend as required
+</span>        }
+        
+        <span class="c"># Finally, send all non-media requests to the Django server.
+</span>        <span class="n">location</span> / {
+            <span class="n">include</span>     <span class="n">uwsgi_params</span>; <span class="c"># the uwsgi_params file you installed
+</span>            <span class="n">uwsgi_pass</span> <span class="m">127</span>.<span class="m">0</span>.<span class="m">0</span>.<span class="m">1</span>:<span class="m">8001</span>;
+        }
+    }
+</code></pre></div></div>
+
+<p>首先，“location /media”和“location /static”那两段都是用来配置静态文件的，静态文件是指不经django处理的文件，只需要nginx给用户就可以。</p>
+
+<p>然而，对于其他请求，“location /”是将这些请求交给uwsgi处理，且设置了uwsgi的监听地址：127.0.0.1:8001。</p>
+
+<p>这样，我们的django就部署好了，访问就可以使用了。</p>
+
+<p>最后，我们的在线演示地址：<a href="http://reader.qwertier.cn">http://reader.qwertier.cn</a>，我们的GitHub项目地址：<a href="https://github.com/HIT-Three-Friends/Friend-Reader/">https://github.com/HIT-Three-Friends/Friend-Reader/</a>。</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2017/11/26/after-1st-iteration/">
+        写在第一轮迭代验收之后
+      </a>
+    </h1>
+
+    <span class="post-date">26 Nov 2017</span>
+
+    <h3 id="前言">前言</h3>
+
+<p>跟ljr大腿和hy大腿组队，抱得好爽。</p>
+
+<h3 id="我们做的项目">我们做的项目</h3>
+
+<blockquote>
+  <p>开发一个Web网站：</p>
+  <ol>
+    <li>用户选择N个社交网络服务，指定自己关心的社交好友(及其在N个社交网络
+中的账号/主页等)；</li>
+    <li>网站自动抽取好友在这N个服务中的更新记录，汇总在一起展示给当前用户；</li>
+    <li>网站可分析好友在N个服务中的活跃度随时间/日期变化的规律；</li>
+    <li>网站可分析好友的“兴趣”随日期变化的规律；</li>
+    <li>网站可感知与该好友具有密切社交互动的其他人，并分析他/她们之间互动
+的规律(活跃度、主题)等。</li>
+    <li>当好友发布某些特定主题的内容时，网站可主动推送给当前用户。</li>
+  </ol>
+</blockquote>
+
+<p>要做的项目需要从老师给定点的列表中选，通过民主决议，我们一致决定做网页更新订阅<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>。然而不幸的是，这个被别人做了，于是就做了个类似的好友动态的订阅网站。效果如下：</p>
+
+<p><img src="http://blog.qwertier.cn/public/images/after-1st-iteration/show_activities.png" alt="好友动态展示" /></p>
+<center>下拉自动获取内容，通过点击内容展开折叠</center>
+
+<p><img src="http://blog.qwertier.cn/public/images/after-1st-iteration/show_vitalities.png" alt="好友活跃度分析" /></p>
+<center>分析汪泽堃同学在一天内的知乎活跃度情况（因为服务器时区设置问题，横轴时间应该+8）</center>
+
+<p><img src="http://blog.qwertier.cn/public/images/after-1st-iteration/config_user.png" alt="好友设置" /></p>
+
+<h3 id="历程">历程</h3>
+
+<p>做这个东西的过程总体上还是比较顺利的。</p>
+
+<p>为了不浪费时间，三个人能平行推进，我们决定三人分别负责前端（我），后端（ljr）和爬虫（hy）。我和ljr大爷还专门写了个接口文档。</p>
+
+<p><img src="http://blog.qwertier.cn/public/images/after-1st-iteration/interface.png" alt="接口文档" /></p>
+
+<p>但是小队仍然遇到了一些障碍。对我而言，主要是前端的交互设计。</p>
+
+<p>之所以我来写前端，主要是因为另外两个大腿之前没怎么写过前端。然而我也不是写前端的料，就只是多点经验。所以特别喜欢LaTeX这样的东西，内容和设计分离，只专注于内容就行，所以写报告的时候能用LaTeX我一般就不会用其他东西。</p>
+
+<p>设计上的问题虽然大都像是“这个按钮应该是什么颜色”，“这个头像应该多大”这样的不是什么大问题的问题。但是到了强迫症患者的手上，就变成了项目拖延的最重要的原因。</p>
+
+<h3 id="结果">结果</h3>
+
+<p>结果只能说是差强人意，由于项目的固有难度，我们没有做完主动推送和好友互动分析功能，最后的得分只有83/100分，希望能在最后的验收环节让助教和用户满意。</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>就是用户对网页进行订阅，然后网站自动获取网页内容的更新，还要智能地解析网页的结构&nbsp;<a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2017/09/20/Configuring-Maven-Tomcat-Struts-on-Eclipse/">
+        在Eclipse上通过Maven配置Tomcat 9.0 + Struts 2.5 (软工课程相关)
+      </a>
+    </h1>
+
+    <span class="post-date">20 Sep 2017</span>
+
+    <p>实验二需要用Eclipse配置Tomcat和Struts环境，看到友班的同学用Jetbrains IntelliJ IDEA不费吹灰之力就配好了环境，心里有点羡慕。不过现在终于用Eclipse配置好了，把主要的步骤在这贴一下，最重要的还是自己踩过的坑，希望别人不用再踩了。</p>
+
+<h3 id="把eclipse-for-java-developers强化成eclipse-ide-for-java-ee-developers">把Eclipse for Java Developers强化成Eclipse IDE for Java EE Developers</h3>
+
+<p>如果你像我一样，用现在的Eclipse版本用出了感情，不想再下一个Eclipse IDE for Java EE Developers，那你可能要花好几个小时装很多Eclipse的插件。因为一开始不理解，无病乱投医，装了许多插件，具体有：</p>
+
+<p>通过”Help”-“Install New Software”安装的：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Data Tools Platform Extender SDK, Data Tools Platform Enablement Extender SDK (数据库可视化管理相关)
+2. Eclipse Java EE Developer Tools
+3. Eclipse Java Web Developer Tools
+4. Eclipse Web Developer Tools
+5. Eclipse XML Editors and Tools
+6. JST Server Adapters, JST Server Adapters Extensions
+</code></pre></div></div>
+
+<p>通过”Help”-“Eclipse Marketplace”安装的：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Tomcat Plugin (后来发现只支持到7.0，于是卸载了，实际上这东西也没什么大用)
+2. Emacs+ (这玩意太好用了，完美还原Emacs的快捷键)
+</code></pre></div></div>
+
+<h3 id="安装配置tomcat">安装、配置Tomcat</h3>
+
+<p>接下来可以<a href="http://tomcat.apache.org">下载</a>Tomcat，如果下载的是绿色版，把Tomcat解压到某个目录里即可。</p>
+
+<p>然后在”Window”-“Preferences”-“Server”-“Runtime Environments”里配置好Tomcat，使Eclipse能找到、正确调用Tomcat。</p>
+
+<p><img src="http://blog.qwertier.cn/public/images/Configuring-Maven-Tomcat-Struts-on-Eclipse/configuring_tomcat.png" alt="" /></p>
+
+<h3 id="新建项目">新建项目</h3>
+
+<p>这里我们新建一个Dynamic Web Project项目: “File”-“New”-“Other..”-“Web”-“Dynamic Web Project”。</p>
+
+<p><img src="http://blog.qwertier.cn/public/images/Configuring-Maven-Tomcat-Struts-on-Eclipse/new_project_1.png" alt="" /></p>
+
+<p>两次”Next”即可，在最后一步可以让向导帮我们生成web.xml。</p>
+
+<p>新建完项目之后，目录结构如下：</p>
+
+<p><img src="http://blog.qwertier.cn/public/images/Configuring-Maven-Tomcat-Struts-on-Eclipse/new_project_2.png" alt="" /></p>
+
+<p>如果libraries里没有Tomcat的库，可以在项目的属性设置里的”Java Build Path”中，”Add Library”-“Server Runtime”-“Apache Tomcat V9.0”，把Tomcat的库加进Build Path。</p>
+
+<p>接下来，把项目转化为Maven项目，以方便管理依赖。右键项目名-“Configure”-“Conver to Maven Project”。</p>
+
+<h3 id="在项目里配置tomcat与struts">在项目里配置Tomcat与Struts</h3>
+
+<p>首先把Struts添加到项目的依赖中，做法可以参考<a href="/2017/09/09/Maven-Graphviz/">前一篇博文</a>。</p>
+
+<p>在web-app标签中，加入这段代码，让Tomcat知道，我们使用的是Struts框架。</p>
+
+<pre><code class="language-XML">	&lt;filter&gt;
+		&lt;filter-name&gt;struts2&lt;/filter-name&gt;
+		&lt;filter-class&gt;org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter&lt;/filter-class&gt;
+	&lt;/filter&gt;
+	&lt;filter-mapping&gt;
+		&lt;filter-name&gt;struts2&lt;/filter-name&gt;
+		&lt;url-pattern&gt;*.do&lt;/url-pattern&gt;
+	&lt;/filter-mapping&gt;
+	&lt;filter-mapping&gt;
+		&lt;filter-name&gt;struts2&lt;/filter-name&gt;
+		&lt;url-pattern&gt;*.action&lt;/url-pattern&gt;
+	&lt;/filter-mapping&gt;
+</code></pre>
+
+<p>接下来在”Java Resources/src”中新建struts.xml，填入以下代码，将”HelloWorld.action”映射到”HelloWorld.jsp”，中间需HelloWorld类处理：</p>
+
+<pre><code class="language-XML">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd"&gt;
+&lt;struts&gt;
+	&lt;include file="struts-default.xml" /&gt;
+	&lt;package name="test2333" extends="struts-default"&gt;
+		&lt;action name="HelloWorld" class="test2333.HelloWorld"&gt;
+			&lt;result&gt;/HelloWorld.jsp&lt;/result&gt;
+		&lt;/action&gt;
+	&lt;/package&gt;
+&lt;/struts&gt;
+</code></pre>
+
+<p>然后在”WEB-INF”中新建”HelloWorld.jsp”，填入以下代码：</p>
+
+<pre><code class="language-HTML">&lt;%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%&gt;
+&lt;%@ taglib prefix="s" uri="/struts-tags" %&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;h2&gt;&lt;s:property value="message" /&gt;&lt;/h2&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>在”Java Resources/src”中新建”HelloWorld.java”，填入</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">test2333</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.opensymphony.xwork2.ActionSupport</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="kd">extends</span> <span class="n">ActionSupport</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">MESSAGE</span> <span class="o">=</span> <span class="s">"Struts is up and running ..."</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="n">setMessage</span><span class="o">(</span><span class="n">MESSAGE</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">SUCCESS</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"test"</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setMessage</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getMessage</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">message</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<h3 id="运行网站">运行网站</h3>
+
+<p>这样就基本配置好了一个基于Struts的Java Web项目。想要启动它的话，只需要右击项目名-“Run As”-“Run On Server”，</p>
+
+<p><img src="http://blog.qwertier.cn/public/images/Configuring-Maven-Tomcat-Struts-on-Eclipse/run_on_server.png" alt="" /></p>
+
+<p>一路Next即可。</p>
+
+<p>打开浏览器，地址栏输入”<a href="localhost:8080/test2333/HelloWorld.action">localhost:8080/test2333/HelloWorld.action</a>“，就能看到效果了。</p>
+
+<p><strong>如果404错误（正如我之前遇到的），那么可以检查一下Console里的错误信息，如果有NoClassException错误，可以试试把structs的lib文件放到tomcat安装路径下的lib文件夹中。</strong></p>
+
+<p><img src="http://blog.qwertier.cn/public/images/Configuring-Maven-Tomcat-Struts-on-Eclipse/page_on_chrome.png" alt="" /></p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2017/09/09/Maven-Graphviz/">
+        在Eclipse项目中通过Maven使用其他包 (Package)的方法 (软工课程相关)
+      </a>
+    </h1>
+
+    <span class="post-date">09 Sep 2017</span>
+
+    <p>第一眼看实验1的时候，发现是真的难。在不用外部库且图美观可读的前提下画出一个带权有向图，想一想就恶心。然而，一天之后，要求就改了。画图部分，可以使用外部库了。助教学长还推荐了Graphviz这个东西。于是就搜了一下“Graphviz Java”，还真是搜出了点东西：<a href="https://github.com/nidi3/graphviz-java">graphviz-java</a>——提供了能在Java中使用的Graphviz接口。但这个repo的作者在README里一点都没写怎么在项目里引入这个东西，本人也是在解奥然学长帮助下才（算是有点）搞明白，在这里粘一下我在项目里引入graphviz-java的方法吧。</p>
+
+<h3 id="捷径使用maven">捷径——使用Maven</h3>
+
+<blockquote>
+  <p>Apache Maven，是一个软件（特别是Java软件）项目管理及自动构建工具。<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup></p>
+</blockquote>
+
+<p>就通过Maven导入graphviz-java的过程而言，个人觉得Maven有点像是make，程序员设置依赖关系，然后Maven就去满足依赖。而我们就只需要在项目的依赖中加入graphviz-java，然后使用Maven构建程序，Maven就会自动下载部署所需要的依赖，graphviz-java就可以用了。</p>
+
+<h3 id="在eclipse工程中添加依赖">在Eclipse工程中添加依赖<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup></h3>
+
+<p>如果想要使用Maven，首先需要新建Maven工程。菜单栏里”File” - “New” - “Other”，弹出的”New”对话框中，选择”Maven” - “Maven Project”，然后点击”Next”。</p>
+
+<p><img src="http://blog.qwertier.cn/public/images/Maven-Graphviz/new_maven_project.png" alt="New" class="center-image" /></p>
+
+<p>接下来，一路”Next”，随便填好”Group ID”和”Artifact ID”，点击”Finish”，就可以新建一个Maven工程。</p>
+
+<p><img src="http://blog.qwertier.cn/public/images/Maven-Graphviz/new_maven_project2.png" alt="New2" class="center-image" /></p>
+
+<p>在”Package Explorer”中，选择刚才新建的项目，右键 - “Maven” - “Add Dependency”，搜索”graphviz-java”，然后就能找到对应的库，选中确认即可。</p>
+
+<p><img src="http://blog.qwertier.cn/public/images/Maven-Graphviz/add_dependency.png" alt="add_dependency" class="center-image" /></p>
+
+<p>另外，graphviz-java还需要日志记录的依赖，按刚才添加graphviz-java的方法添加SLF4J或者Log4j均可 (graphviz-java的Github repo中有提示)。</p>
+
+<p>之后，在项目上右键 - “Run as” - “Maven Install”，之后Maven就会自动下载所需依赖，然后构建项目。看到Console里出现”Build Success”就说明构建成功了。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">untitled</span><span class="o">.</span><span class="na">tests233</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">guru</span><span class="o">.</span><span class="na">nidi</span><span class="o">.</span><span class="na">graphviz</span><span class="o">.</span><span class="na">model</span><span class="o">.</span><span class="na">Factory</span><span class="o">.*;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">guru.nidi.graphviz.engine.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">guru.nidi.graphviz.model.Graph</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span>
+<span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span> <span class="n">String</span><span class="o">[]</span> <span class="n">args</span> <span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span>
+    <span class="o">{</span>
+    	<span class="n">Graph</span> <span class="n">g</span> <span class="o">=</span> <span class="n">graph</span><span class="o">(</span><span class="s">"example1"</span><span class="o">).</span><span class="na">directed</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span class="n">node</span><span class="o">(</span><span class="s">"a"</span><span class="o">).</span><span class="na">link</span><span class="o">(</span><span class="n">node</span><span class="o">(</span><span class="s">"b"</span><span class="o">)));</span>
+    	<span class="n">Graphviz</span><span class="o">.</span><span class="na">fromGraph</span><span class="o">(</span><span class="n">g</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">200</span><span class="o">).</span><span class="na">render</span><span class="o">(</span><span class="n">Format</span><span class="o">.</span><span class="na">PNG</span><span class="o">).</span><span class="na">toFile</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"example/ex1.png"</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>输入上面的代码 (最前面的包名可能需要修改)，执行一下，就能看到项目文件夹下”example”文件夹中多了”ex1.png”文件，说明示例也运行成功了。</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p><a href="https://zh.wikipedia.org/wiki/Apache_Maven">https://zh.wikipedia.org/wiki/Apache_Maven</a>&nbsp;<a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>本人使用的Eclipse版本为Eclipse IDE for Java Developers 4.7.0&nbsp;<a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+  
+</div>
+
+<div class="pagination">
+  
+    <a class="pagination-item older" href="/page2">Older</a>
+  
+  
+    <span class="pagination-item newer">Newer</span>
+  
+</div>
+
+<center><a href="http://www.miitbeian.gov.cn/" target="_blank" style="font-size: small">鲁ICP备16001914号</a></center>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+      var toggle = document.querySelector('.sidebar-toggle');
+      var sidebar = document.querySelector('#sidebar');
+      var checkbox = document.querySelector('#sidebar-checkbox');
+
+      document.addEventListener('click', function(e) {
+      var target = e.target;
+
+      if(!checkbox.checked ||
+      sidebar.contains(target) ||
+      (target === checkbox || target === toggle)) return;
+
+      checkbox.checked = false;
+      }, false);
+      })(document);
+
+
+
+    </script>
+    
+    
+  </body>
+</html>
