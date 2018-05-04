@@ -1,0 +1,8 @@
+﻿  server.cpp
+e:\hitcs-2018-spring\computer networks\lab\lab2\client\server\server.cpp(203): warning C4309: “=”: 截断常量值
+e:\hitcs-2018-spring\computer networks\lab\lab2\client\server\server.cpp(205): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+e:\hitcs-2018-spring\computer networks\lab\lab2\client\server\server.cpp(225): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  e:\hitcs-2018-spring\computer networks\lab\lab2\client\server\server.cpp(225): note: 请考虑在格式字符串中使用“%zd”
+e:\hitcs-2018-spring\computer networks\lab\lab2\client\server\server.cpp(268): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: 参见“strcpy”的声明
+  server.vcxproj -> E:\HITCS-2018-Spring\Computer Networks\lab\lab2\client\x64\Debug\server.exe

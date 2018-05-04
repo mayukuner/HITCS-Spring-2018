@@ -10,6 +10,7 @@
 #include <queue>
 #include <set>
 #include <algorithm>
+#include <fstream>
 #pragma comment(lib,"Ws2_32.lib")
 #define MAXSIZE 65507 //发送数据报文的最大长度
 #define HTTP_PORT 80 //http 服务器端口
@@ -31,6 +32,8 @@ BOOL InitSocket();
 void ParseHttpHead(char *buffer, HttpHeader * httpHeader);
 BOOL ConnectToServer(SOCKET *serverSocket, char *host);
 unsigned int __stdcall ProxyThread(LPVOID lpParameter);
+bool isForbidUrl(char*);
+std::pair<std::string, std::string> transUrl(char*);
 
 //代理相关参数
 SOCKET ProxyServer;
@@ -130,7 +133,7 @@ BOOL InitSocket() {
 //************************************
 // Method: addCache
 //************************************
-#define CACHE_SIZE 10
+#define CACHE_SIZE 100
 std::mutex cacheMutex;
 std::map<std::string, time_t> time_stamp;
 std::map<std::string, std::string> cache;
@@ -168,17 +171,58 @@ unsigned int __stdcall ProxyThread(LPVOID lpParameter) {
 	int recvSize;
 	int ret;
 	HttpHeader* httpHeader;
+	int len;
 	recvSize = recv(((ProxyParam*)lpParameter)->clientSocket, Buffer, MAXSIZE, 0);
 	if (recvSize <= 0) {
 		goto error;
 	}
+	puts("-----------");
 	printf("Buffer:\n%s\n\n", Buffer);
+	len = strlen(Buffer);
+	for (int i = 1; i <= 10; i++) {
+		printf("%c %d\n", Buffer[len - i], (int)Buffer[len - i]);
+	}
+	puts("-----------");
 	httpHeader = new HttpHeader();
 	CacheBuffer = new char[recvSize + 1];
 	ZeroMemory(CacheBuffer, recvSize + 1);
 	memcpy(CacheBuffer, Buffer, recvSize);
 	ParseHttpHead(CacheBuffer, httpHeader);
 
+	if (isForbidUrl(httpHeader->host)) {
+		std::string tmp = "HTTP/1.1 403 Forbidden\r\n\
+Date: Sat, 31 Dec 2005 23:59:59 GMT\r\n\
+Content-Type: text/html; charset = ISO - 8859 - 1\r\n\
+Content-Length: 122\r\n\
+\r\n\
+<html>\r\n\
+<head>\r\n\
+<title>Wrong Homepage</title>\r\n\
+</head>\r\n\
+<body>\r\n\
+sorry for that\r\n\
+</body>\r\n\
+</html>";
+		printf("tmp:%s\n", tmp.c_str());
+		ret = send(((ProxyParam *)lpParameter)->clientSocket, tmp.c_str(),
+			tmp.size() + 1, 0);
+		goto error;
+	}
+
+	{
+		auto p = transUrl(httpHeader->host);
+		if (p.first != "") {
+			printf("\nfake request:\n%s\n", p.second.c_str());
+			std::ifstream file(p.second, std::ifstream::in);
+			file.read(Buffer, sizeof(Buffer));
+			printf("Fishing Buffer:\n%s\n", Buffer);
+			//将目标服务器返回的数据直接转发给客户端
+			ret = send(((ProxyParam*)lpParameter)->clientSocket, Buffer, sizeof(Buffer), 0);
+			goto error;
+		}
+	}
+
+	// 疑问: 需不需要加[]
 	delete CacheBuffer;
 	if (!ConnectToServer(&((ProxyParam*)lpParameter)->serverSocket, httpHeader->host)) {
 		goto error;
@@ -192,10 +236,16 @@ unsigned int __stdcall ProxyThread(LPVOID lpParameter) {
 		std::string request0(Buffer);
 		std::string modified("If-Modified-Since: ");
 		char *word = new char[1024];
-		strftime(word, sizeof(word), "%a, %d %b %Y %X %Z", gmtime(&time_stamp[Buffer]));
-		request.insert(request.find_first_of("\r\n") + 2, word);
+		tm t;
+		gmtime_s(&t, &time_stamp[Buffer]);
+		ZeroMemory(word, 1024);
+		strftime(word, 1024, "%a, %d %b %Y %X GMT", &t);
+		word[strlen(word)] = '\r';
+		word[strlen(word)] = '\n';
+		modified.append(word);
+		request.insert(request.find_first_of("\r\n") + 2, modified.c_str());
 		delete word;
-		printf("\nNew request after inserted if-modified-since: %s\n\n", request.c_str());
+		printf("\n---%d---\nNew request after inserted if-modified-since: %s\n\n", request.find_first_of("\r\n"), request.c_str());
 		//将客户端发送的 HTTP 数据报文直接转发给目标服务器
 		ret = send(((ProxyParam *)lpParameter)->serverSocket, request.c_str(), request.size() + 1, 0);
 		//等待目标服务器返回数据
@@ -204,18 +254,27 @@ unsigned int __stdcall ProxyThread(LPVOID lpParameter) {
 			goto error;
 		}
 		std::string response(Buffer);
-		if (response.find_first_of("304") < response.find_first_of("\r\n")) {
+		printf("----Response----\n%s\n--------\n", response.c_str());
+		int pos = response.find("304");
+		if (pos != -1 && pos < response.find_first_of("\r\n")) {
+			printf("\nNo need to re-request!", pos, response.find_first_of("\r\n"), response[pos], response[pos + 1], response[pos + 2]);
+			int t = 0;
+			while (response[t] != '\r') {
+				putchar(response[t++]);
+			}
+			putchar('\n');
 			ret = send(((ProxyParam*)lpParameter)->clientSocket, cache[request0].c_str(), cache[request0].size() + 1, 0);
 		}
 		else {
+			printf("\nNeed to re-request!\n");
 			//将目标服务器返回的数据直接转发给客户端
 			ret = send(((ProxyParam*)lpParameter)->clientSocket, Buffer, sizeof(Buffer), 0);
 		}
 		cacheMutex.unlock();
 	}
 	else {
-		char *requestBuffer = new char[recvSize + 1];
-		ZeroMemory(requestBuffer, sizeof(requestBuffer));
+		char *requestBuffer = new char[MAXSIZE + 1];
+		ZeroMemory(requestBuffer, sizeof(Buffer));
 		memcpy(requestBuffer, Buffer, strlen(Buffer));
 		//将客户端发送的 HTTP 数据报文直接转发给目标服务器
 		ret = send(((ProxyParam *)lpParameter)->serverSocket, Buffer, strlen(Buffer) + 1, 0);
@@ -226,7 +285,7 @@ unsigned int __stdcall ProxyThread(LPVOID lpParameter) {
 		}
 		cacheMutex.lock();
 		addCache(requestBuffer, Buffer);
-		printf("\n-------------\nrequestBuffer:%s\n--------------\n", requestBuffer);
+		// printf("\n-------------\nrequestBuffer:%s\n--------------\n", requestBuffer);
 		//将目标服务器返回的数据直接转发给客户端
 		ret = send(((ProxyParam*)lpParameter)->clientSocket, Buffer, sizeof(Buffer), 0);
 		cacheMutex.unlock();
@@ -297,6 +356,7 @@ void ParseHttpHead(char *buffer, HttpHeader * httpHeader) {
 // Parameter: char * host
 //************************************
 BOOL ConnectToServer(SOCKET *serverSocket, char *host) {
+	printf("host:%s\n", host);
 	sockaddr_in serverAddr;
 	serverAddr.sin_family = AF_INET;
 	serverAddr.sin_port = htons(HTTP_PORT);
@@ -315,4 +375,31 @@ BOOL ConnectToServer(SOCKET *serverSocket, char *host) {
 		return FALSE;
 	}
 	return TRUE;
+}
+
+
+
+bool isForbidUrl(char *s) {
+	std::string t(s);
+	static std::vector<std::string> forbidUrl = {
+		"jwts.hit.edu.cn"
+	};
+	for (auto url : forbidUrl) {
+		if (t.find(url) == 0) {
+			return true;
+		}
+	}
+	return false;
+}
+
+std::pair<std::string, std::string> transUrl(char *s) {
+	static std::map<std::string, std::pair<std::string, std::string> > urlDict = {
+		{ "qioqio.top", std::make_pair("blog.qwertier.cn", "Text.txt") }
+	};
+	if (urlDict.count(s) != 0) {
+		return urlDict[s];
+	}
+	else {
+		return std::make_pair("", "");
+	}
 }

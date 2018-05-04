@@ -1,0 +1,12 @@
+﻿  client.cpp
+e:\hitcs-2018-spring\computer networks\lab\lab2\client\client\client.cpp(85): warning C4305: “初始化”: 从“double”到“float”截断
+e:\hitcs-2018-spring\computer networks\lab\lab2\client\client\client.cpp(86): warning C4305: “初始化”: 从“double”到“float”截断
+e:\hitcs-2018-spring\computer networks\lab\lab2\client\client\client.cpp(104): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+e:\hitcs-2018-spring\computer networks\lab\lab2\client\client\client.cpp(115): warning C4309: “=”: 截断常量值
+e:\hitcs-2018-spring\computer networks\lab\lab2\client\client\client.cpp(147): warning C4244: “=”: 从“unsigned short”转换到“char”，可能丢失数据
+e:\hitcs-2018-spring\computer networks\lab\lab2\client\client\client.cpp(156): warning C4244: “=”: 从“unsigned short”转换到“char”，可能丢失数据
+e:\hitcs-2018-spring\computer networks\lab\lab2\client\client\client.cpp(70): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+  c:\program files (x86)\windows kits\8.1\include\um\winsock2.h(1850): note: 参见“inet_addr”的声明
+e:\hitcs-2018-spring\computer networks\lab\lab2\client\client\client.cpp(91): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(2254): note: 参见“sscanf”的声明
+  client.vcxproj -> E:\HITCS-2018-Spring\Computer Networks\lab\lab2\client\x64\Debug\client.exe

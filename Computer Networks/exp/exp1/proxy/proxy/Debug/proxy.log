@@ -1,6 +1,1 @@
-﻿  proxy.cpp
-e:\hitcs-2018-spring\computer networks\exp\exp1\proxy\proxy\proxy.cpp(63): warning C4101: “dwThreadID”: 未引用的局部变量
-e:\hitcs-2018-spring\computer networks\exp\exp1\proxy\proxy\proxy.cpp(195): warning C4996: 'gmtime': This function or variable may be unsafe. Consider using gmtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\time.h(495): note: 参见“gmtime”的声明
-e:\hitcs-2018-spring\computer networks\exp\exp1\proxy\proxy\proxy.cpp(166): warning C4101: “clientAddr”: 未引用的局部变量
-  proxy.vcxproj -> E:\HITCS-2018-Spring\Computer Networks\exp\exp1\proxy\Debug\proxy.exe
+﻿  proxy.vcxproj -> E:\HITCS-2018-Spring\Computer Networks\exp\exp1\proxy\Debug\proxy.exe
