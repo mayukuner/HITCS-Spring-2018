@@ -10,6 +10,7 @@ const int BUFFER_LENGTH = 1026; //»º³åÇø´óÐ¡£¬£¨ÒÔÌ«ÍøÖÐ UDP µÄÊý¾ÝÖ¡ÖÐ°ü³¤¶ÈÓ¦Ð
 const int SEND_WIND_SIZE = 10;//·¢ËÍ´°¿Ú´óÐ¡Îª 10£¬GBN ÖÐÓ¦Âú×ã W + 1 <=N£¨W Îª·¢ËÍ´°¿Ú´óÐ¡£¬N ÎªÐòÁÐºÅ¸öÊý£©
 			      //±¾ÀýÈ¡ÐòÁÐºÅ 0...19 ¹² 20 ¸ö
 			      //Èç¹û½«´°¿Ú´óÐ¡ÉèÎª 1£¬ÔòÎªÍ£-µÈÐ­Òé
+const int RECV_WIND_SIZE = 10;
 const int SEQ_SIZE = 20; //ÐòÁÐºÅµÄ¸öÊý£¬´Ó 0~19 ¹²¼Æ 20 ¸ö
 			 //ÓÉÓÚ·¢ËÍÊý¾ÝµÚÒ»¸ö×Ö½ÚÈç¹ûÖµÎª 0£¬ÔòÊý¾Ý»á·¢ËÍÊ§°Ü
 			 //Òò´Ë½ÓÊÕ¶ËÐòÁÐºÅÎª 1~20£¬Óë·¢ËÍ¶ËÒ»Ò»¶ÔÓ¦
@@ -108,23 +109,78 @@ void ackHandler(char c) {
 		curAck = index + 1;
 	}
 }
-void receiveSR(SOCKET sockServer, SOCKADDR_IN addrClient) {	
+
+inline bool inRange(int x, int l, int r) {
+    return l <= x && x <= r;
+}
+void receiveSR(SOCKET &sockServer, SOCKADDR_IN &addrClient) {
     //ÉèÖÃÌ×½Ó×ÖÎª·Ç×èÈûÄ£Ê½
     int iMode = 0; //1£º·Ç×èÈû£¬0£º×èÈû
     ioctlsocket(sockServer, FIONBIO, (u_long FAR*) &iMode);//·Ç×èÈûÉèÖÃ
     char* buffer = new char[BUFFER_LENGTH];
+    char** window = new char*[RECV_WIND_SIZE];
+    for (int i = 0; i < RECV_WIND_SIZE; i++) {
+        window[i] = new char[BUFFER_LENGTH];
+        window[i][0] = '\0';
+    }
     int length;
-    int recvSize;
+    int recvBase = 1, recvSize;
+    int stage = 0;
     while (true) {
         recvSize =
             recvfrom(sockServer, buffer, BUFFER_LENGTH, 0, ((SOCKADDR*)&addrClient), &length);
         printf("Data received from the client: %s\n", buffer);
-        Sleep(500);
+        switch (stage) {
+        case 0://µÈ´ýÎÕÊÖ½×¶Î
+            unsigned char u_code = (unsigned char)buffer[0];
+            if (u_code == 205)
+            {
+                printf("Ready for file transmission\n");
+                buffer[0] = 200;
+                buffer[1] = '\0';
+                sendto(sockServer, buffer, 2, 0,
+                    (SOCKADDR*)&addrClient, sizeof(SOCKADDR));
+                stage = 1;
+            }
+            break;
+        case 1://Êý¾Ý´«Êä½×¶Î
+            unsigned char seq = buffer[0];
+            if (seq == 0 && strcmp(buffer + 1, "finished") == 0) {
+                printf("Transmission finished!");
+                stage = 2;
+                goto end;
+            }
+            printf("recv a packet with a seq of %d\n", seq);
+            if (inRange(seq, recvBase - RECV_WIND_SIZE, recvBase + RECV_WIND_SIZE - 1)) {
+                sendto(sockServer, buffer, 2, 0,
+                    (SOCKADDR*)&addrClient, sizeof(SOCKADDR));
+                printf("send an ack of %d\n", (unsigned char)buffer[0]);
+            }
+            if (inRange(seq, recvBase, recvBase + RECV_WIND_SIZE - 1)) {
+                int window_seq = seq % RECV_WIND_SIZE;
+                if (window[window_seq][0] == 0) {
+                    memcpy(window[window_seq], buffer + 1, BUFFER_LENGTH - 1);
+                }
+                while (window[recvBase%RECV_WIND_SIZE][0]) {
+                    window[recvBase%RECV_WIND_SIZE][0] = 0;
+                    printf("Confirmed packet %d: %s\n", recvBase, window[recvBase%RECV_WIND_SIZE]);
+                    recvBase++;
+                }
+            }
+        }
+	
     }
+
+end:
     //ÉèÖÃÌ×½Ó×ÖÎª·Ç×èÈûÄ£Ê½
     int iMode = 1; //1£º·Ç×èÈû£¬0£º×èÈû
     ioctlsocket(sockServer, FIONBIO, (u_long FAR*) &iMode);//·Ç×èÈûÉèÖÃ
+
+    //ÄÚ´æ»ØÊÕ
+    for (int i = 0; i < RECV_WIND_SIZE; i++)
+        delete[] window[i];
     delete[] buffer;
+    delete[] window;
 }
 //Ö÷º¯Êý
 int main(int argc, char* argv[])
