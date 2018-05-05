@@ -113,75 +113,115 @@ void ackHandler(char c) {
 inline bool inRange(int x, int l, int r) {
     return l <= x && x <= r;
 }
-void receiveSR(SOCKET &sockServer, SOCKADDR_IN &addrClient) {
-    //设置套接字为非阻塞模式
-    int iMode = 0; //1：非阻塞，0：阻塞
-    ioctlsocket(sockServer, FIONBIO, (u_long FAR*) &iMode);//非阻塞设置
-    char* buffer = new char[BUFFER_LENGTH];
-    char** window = new char*[RECV_WIND_SIZE];
-    for (int i = 0; i < RECV_WIND_SIZE; i++) {
-        window[i] = new char[BUFFER_LENGTH];
-        window[i][0] = '\0';
-    }
-    int length;
-    int recvBase = 1, recvSize;
+void sendSR(SOCKET &sockServer, SOCKADDR_IN &addrClient) {
+    //将测试数据读入内存
+    printf("Enter sendSR\n");
+    std::ifstream icin;
+    icin.open("test.txt");
+    char data[1024 * 113];
+    ZeroMemory(data, sizeof(data));
+    icin.read(data, 1024 * 113);
+    icin.close();
+    int totalPacket = 30; //sizeof(data) / 1024;
+    printf("Total Packet:%d\n", totalPacket);
     int stage = 0;
+    int length=sizeof(SOCKADDR), recvSize;
+    int* waitCount = new int[SEND_WIND_SIZE];
+    int curSeq, sendBase, totalSeq;
+    int shakeCount = 0;
+    char* buffer = new char[BUFFER_LENGTH];
     while (true) {
-        recvSize =
-            recvfrom(sockServer, buffer, BUFFER_LENGTH, 0, ((SOCKADDR*)&addrClient), &length);
-        printf("Data received from the client: %s\n", buffer);
         switch (stage) {
-        case 0://等待握手阶段
-            unsigned char u_code = (unsigned char)buffer[0];
-            if (u_code == 205)
-            {
-                printf("Ready for file transmission\n");
-                buffer[0] = 200;
-                buffer[1] = '\0';
-                sendto(sockServer, buffer, 2, 0,
-                    (SOCKADDR*)&addrClient, sizeof(SOCKADDR));
-                stage = 1;
+        case 0:
+            printf("Shake hands stage\n");
+            buffer[0] = 205;
+            buffer[1] = 0;
+            sendto(sockServer, buffer, strlen(buffer) + 1, 0,
+                (SOCKADDR*)&addrClient, sizeof(SOCKADDR));
+            Sleep(100);
+            stage = 1;
+            shakeCount = 0;
+            break;
+        case 1:
+            recvSize =
+                recvfrom(sockServer, buffer, BUFFER_LENGTH, 0, ((SOCKADDR*)&addrClient), &length);
+            if (recvSize < 0) {
+                ++shakeCount;
+                if (shakeCount > 20) {
+                    stage = 0;
+                    printf("Timeout error\n");
+                    break;
+                }
+                Sleep(500);
+                continue;
+            }
+            else {
+                if ((unsigned char)buffer[0] == 200) {
+                    printf("Begin a file transfer\n");
+                    printf("File size is %dB, each packet is 1024B and packet total num is %d\n", sizeof(data), totalPacket);
+                    curSeq = 0;
+                    sendBase = 0;
+                    totalSeq = 0;
+                    memset(waitCount, 0x3f, sizeof(int)*SEND_WIND_SIZE);
+                    stage = 2;
+                }
             }
             break;
-        case 1://数据传输阶段
-            unsigned char seq = buffer[0];
-            if (seq == 0 && strcmp(buffer + 1, "finished") == 0) {
-                printf("Transmission finished!");
-                stage = 2;
+        case 2:
+            if (sendBase == totalPacket) {
+                // 传输完成
+                printf("Transmission finished!\n");
+                buffer[0] = 0;
+                strcpy(buffer + 1, "finished");
+                sendto(sockServer, buffer, BUFFER_LENGTH, 0, (SOCKADDR*)&addrClient,
+                    sizeof(SOCKADDR));
                 goto end;
             }
-            printf("recv a packet with a seq of %d\n", seq);
-            if (inRange(seq, recvBase - RECV_WIND_SIZE, recvBase + RECV_WIND_SIZE - 1)) {
-                sendto(sockServer, buffer, 2, 0,
+            curSeq = -1;
+            for (int i = sendBase; i < min(totalPacket, sendBase + SEND_WIND_SIZE); i++) {
+                if (waitCount[i%SEND_WIND_SIZE] > 20) {
+                    curSeq = i;
+                    break;
+                }
+            }
+            if (curSeq != -1) {
+                buffer[0] = curSeq + 1;
+                int windowSeq = curSeq % SEND_WIND_SIZE;
+                waitCount[windowSeq] = 0;
+                memcpy(buffer + 1, data + 1024 * curSeq, 1024);
+                buffer[BUFFER_LENGTH-1] = 0;
+                printf("send a packet with a seq of %d, current window is [%d, %d]\n", curSeq, sendBase, sendBase+SEND_WIND_SIZE);
+                sendto(sockServer, buffer, BUFFER_LENGTH, 0,
                     (SOCKADDR*)&addrClient, sizeof(SOCKADDR));
-                printf("send an ack of %d\n", (unsigned char)buffer[0]);
+                Sleep(500);
             }
-            if (inRange(seq, recvBase, recvBase + RECV_WIND_SIZE - 1)) {
-                int window_seq = seq % RECV_WIND_SIZE;
-                if (window[window_seq][0] == 0) {
-                    memcpy(window[window_seq], buffer + 1, BUFFER_LENGTH - 1);
+            //等待 Ack，若没有收到，则返回值为-1
+            recvSize =
+                recvfrom(sockServer, buffer, BUFFER_LENGTH, 0, ((SOCKADDR*)&addrClient), &length);
+            if (recvSize >= 0) {
+                int seq = buffer[0] - 1;
+                if (inRange(seq, sendBase, sendBase + SEND_WIND_SIZE - 1)) {
+                    waitCount[seq%SEND_WIND_SIZE] = -1;
+                    while (waitCount[sendBase%SEND_WIND_SIZE] == -1) {
+                        waitCount[sendBase % SEND_WIND_SIZE] = 21;
+                        sendBase++;
+                    }
                 }
-                while (window[recvBase%RECV_WIND_SIZE][0]) {
-                    window[recvBase%RECV_WIND_SIZE][0] = 0;
-                    printf("Confirmed packet %d: %s\n", recvBase, window[recvBase%RECV_WIND_SIZE]);
-                    recvBase++;
-                }
+                printf("recv a ack with a seq of %d, current window is [%d, %d)\n", seq, sendBase, sendBase + SEND_WIND_SIZE);
             }
+            for (int i = sendBase; i < min(totalPacket, sendBase + SEND_WIND_SIZE); i++) {
+                if (waitCount[i%SEND_WIND_SIZE] != -1)
+                    waitCount[i%SEND_WIND_SIZE]++;
+            }
+            Sleep(500);
         }
-	
     }
-
 end:
-    //设置套接字为非阻塞模式
-    int iMode = 1; //1：非阻塞，0：阻塞
-    ioctlsocket(sockServer, FIONBIO, (u_long FAR*) &iMode);//非阻塞设置
-
-    //内存回收
-    for (int i = 0; i < RECV_WIND_SIZE; i++)
-        delete[] window[i];
     delete[] buffer;
-    delete[] window;
+    delete[] waitCount;
 }
+
+
 //主函数
 int main(int argc, char* argv[])
 {
@@ -218,7 +258,7 @@ int main(int argc, char* argv[])
 	addrServer.sin_port = htons(SERVER_PORT);
 	err = bind(sockServer, (SOCKADDR*)&addrServer, sizeof(SOCKADDR));
 	if (err) {
-		err = GetLastError();
+        err = GetLastError();
 		printf("Could not bind the port %d for socket.Error code is %d\n", SERVER_PORT, err);
 		WSACleanup();
 		return -1;
@@ -251,9 +291,13 @@ int main(int argc, char* argv[])
 		printf("recv from client: %s\n", buffer);
 		if (strcmp(buffer, "-time") == 0) {
 			getCurTime(buffer);
+            sendto(sockServer, buffer, BUFFER_LENGTH, 0, (SOCKADDR*)&addrClient,
+                sizeof(SOCKADDR));
 		}
 		else if (strcmp(buffer, "-quit") == 0) {
 			strcpy_s(buffer, strlen("Good bye!") + 1, "Good bye!");
+            sendto(sockServer, buffer, BUFFER_LENGTH, 0, (SOCKADDR*)&addrClient,
+                sizeof(SOCKADDR));
 		}
 		else if (strcmp(buffer, "-testgbn") == 0) {
 			//进入 gbn 测试阶段
@@ -340,6 +384,8 @@ int main(int argc, char* argv[])
 							printf("Transmission finished!\n");
 							buffer[0] = 0;
 							strcpy(buffer + 1, "finished");
+                            sendto(sockServer, buffer, BUFFER_LENGTH, 0, (SOCKADDR*)&addrClient,
+                                sizeof(SOCKADDR));
 							runFlag = false;
 						}
 						waitCount = 0;
@@ -350,10 +396,9 @@ int main(int argc, char* argv[])
 			}
 		}
         else if (strcmp(buffer, "-testsr") == 0) {
-            receiveSR(sockServer, addrClient);
+            sendSR(sockServer, addrClient);
+            continue;
         }
-		sendto(sockServer, buffer, BUFFER_LENGTH, 0, (SOCKADDR*)&addrClient,
-			sizeof(SOCKADDR));
 		Sleep(500);
 	}
 	//关闭套接字，卸载库
