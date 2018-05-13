@@ -1,0 +1,161 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{minted}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage{geometry}
+%\geometry{left=5cm,right=5cm,top=2.5cm,bottom=2.5cm}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{minted}
+\usepackage[slantfont,boldfont]{xeCJK}
+\setCJKmainfont{SimSun}
+%% \usepackage{indentfirst}
+%% \setlength{\parindent}{2em}
+\usepackage{float}
+\usepackage{titling}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage[square,sort,comma,numbers]{natbib}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage{url}
+\setCJKmonofont{SimHei}
+\input zhwinfonts
+\setlength{\bibsep}{0.5ex}
+
+\titleformat{\section}{\normalsize\bfseries}{}{0em}{}
+\titlespacing{\section}{0pt}{1em}{0em}
+
+\pretitle{\begin{center}\LARGE}
+\posttitle{\par\end{center}\vskip 0.5em}
+\preauthor{\vspace{8cm}\begin{center}
+    \large \lineskip0.5em %
+    \begin{tabular}[t]{c}}
+\postauthor{\end{tabular}\par\end{center}}
+\predate{\begin{center}\large}
+\postdate{\par\end{center}}
+
+\begin{document}
+
+\title{{\bf\Huge Analysis of Different Implementations of Bitmap Index}}
+\author{\emph{Harbin Institute of Technology}\\\emph{Department of Computer Science and Technology}\\Ma Yukun\\1150310618}
+
+\date{2017/11/18}
+
+\nocite{*}
+
+%% \maketitle\setcounter{page}{0}\thispagestyle{empty}
+%% \newpage
+%% \tableofcontents
+
+\begin{center}
+{\textbf{
+Yukun Ma\\
+Week \#9: Sharding\\
+Page \#1}}
+\end{center}
+
+\section{Problem Statement}
+
+In this paper, I will show what ``sharding'' in a database is and how it works. Apart from that, the benefits and challenges the sharding brings to databases will also be evaluated.
+
+\bibliographystyle{unsrt}
+\bibliography{ref}
+
+\section{Overview of Sharding}
+
+Normally, a database shard refers to a horizontal parition of data in a database.\cite{wiki} And a horizontal partition of a database involves putting different rows in an original table into different tables. Each individual partition of the splited database is called a shard of the database.
+
+For example, there are a lot of teachers in a university, and the table that is storing the teachers are too large to handle. Then we can use sharding to split the big table into some smaller tables. Specifically, we can split the tables according to different departments that teachers are in. First parition table stores the information of the teachers in Department of Computer Science and Engineering, the second partition table stores the information of the teachers in Department of Software Engineering, and so on.
+
+\section{Critical Thinking}
+
+There are many advantages to sharding.
+
+\begin{enumerate}[1.]\setlength{\itemsep}{-0.1cm}\setlength{\topsep}{0pt}
+\item After sharding, the number of rows in each table is reduced.
+\item Sharding may reduce the cost of each query sometimes for some reason\footnote{Considering you want to calulate the number of average salary of teachers in some department.}.
+\item Sharding enables a distribution of the database over multiple machines.
+\end{enumerate}
+
+But sharding also brings some challenges.
+
+\begin{enumerate}[1.]\setlength{\itemsep}{-0.1cm}\setlength{\topsep}{0pt}
+\item Sharding relies much on the network connections between servers much.
+\item Sharding may increase the delay of some query on the database.
+\item Sharding adds much complexity on the database.
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+{\textbf{
+Page \#2}}
+\end{center}
+
+\section{Question}
+
+If there are horizontal partitions of data which are also known as shards. Then there should be vertical horizontals of data. If there are vertical paritions, then what are vertical paritions of data in a database? And what is the use of it?
+
+\section{Method}
+
+{\emph{Describe how you are going to answer your own question stated above.}}
+
+\section{Analysis and Discussion}
+
+Vertical paritioning is the process of creating tables with fewer columns.\cite{wiki2} It is kind of like horizontal paritioning. But horizontal partitioning splits the table by rows, while vertical partitioning splits the table by columns.
+
+\begin{table}[H]
+\centering
+\caption{The original table}\label{tab:tab}
+\begin{tabular}{ccc}
+  \toprule
+  ID &Name &Birthday\\
+  \midrule
+  1 &Dave &1997-02-24\\
+  2 &Yanmei &1995-05-23\\
+  3 &Alice &1996-09-10\\
+  \bottomrule
+\end{tabular}
+\end{table}
+
+\begin{minipage}[t]{0.5\linewidth}
+  \begin{table}[H]
+    \centering
+    \caption{First partition table}\label{tab:stab1}
+    \begin{tabular}{cc}
+      \toprule
+      ID &Name\\
+      \midrule
+      1 &Dave \\
+      2 &Yanmei\\
+      3 &Alice\\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}
+
+\begin{table}[H]
+\centering
+\caption{Second partition table}\label{tab:stab2}
+\begin{tabular}{cc}
+  \toprule
+  ID &Birthday\\
+  \midrule
+  1  &1997-02-24\\
+  2  &1995-05-23\\
+  3  &1996-09-10\\
+  \bottomrule
+\end{tabular}
+\end{table}
+\end{minipage}
+
+Let's suppose we have a table which has 3 people and their birthdays in it as Table \ref{tab:tab} shows. If we split the table by vertical partitioning, the original table may results in two partition tables as Table \ref{tab:stab1} and Table \ref{tab:stab2} show.
+
+
+What is the use of vertical partitioning? When we only need some information in most queries, sometimes it's great to split the table vertically regard to the consideration of efficiency. Also, if there are many rows missing some attributes in the table, it may reduce the size of the database after vertical partitioning. In additional, there is an important technique called database normalization which involves vertical partitioning.
+
+%% \renewcommand\refname{Reference}
+\end{document}

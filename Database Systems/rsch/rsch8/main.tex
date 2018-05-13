@@ -1,0 +1,124 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{minted}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage{geometry}
+%\geometry{left=5cm,right=5cm,top=2.5cm,bottom=2.5cm}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{minted}
+\usepackage[slantfont,boldfont]{xeCJK}
+\setCJKmainfont{SimSun}
+%% \usepackage{indentfirst}
+%% \setlength{\parindent}{2em}
+\usepackage{float}
+\usepackage{titling}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage[square,sort,comma,numbers]{natbib}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage{url}
+\setCJKmonofont{SimHei}
+\input zhwinfonts
+\setlength{\bibsep}{0.5ex}
+
+\titleformat{\section}{\normalsize\bfseries}{}{0em}{}
+\titlespacing{\section}{0pt}{1em}{0em}
+
+\pretitle{\begin{center}\LARGE}
+\posttitle{\par\end{center}\vskip 0.5em}
+\preauthor{\vspace{8cm}\begin{center}
+    \large \lineskip0.5em %
+    \begin{tabular}[t]{c}}
+\postauthor{\end{tabular}\par\end{center}}
+\predate{\begin{center}\large}
+\postdate{\par\end{center}}
+
+\begin{document}
+
+\title{{\bf\Huge Analysis of Different Implementations of Bitmap Index}}
+\author{\emph{Harbin Institute of Technology}\\\emph{Department of Computer Science and Technology}\\Ma Yukun\\1150310618}
+
+\date{2017/11/18}
+
+\nocite{*}
+
+%% \maketitle\setcounter{page}{0}\thispagestyle{empty}
+%% \newpage
+%% \tableofcontents
+
+\begin{center}
+{\textbf{
+Yukun Ma\\
+Week \#10: Clustering\\
+Page \#1}}
+\end{center}
+
+\section{Problem Statement}
+
+In this paper, I will show what is ``clustering'', how it works, the pros and cons of it in the application of databases.
+
+\bibliographystyle{unsrt}
+\bibliography{ref}
+
+\section{Overview of Clustering}
+
+In the field of database, clustering usually refers to the ability of several servers or instances to connect to a single database. An instance can represent the memory and processse that interacts with the database.\cite{techo}
+
+Clustering may be used in kinds of forms.
+
+I learned and talked about database sharding in the last research. And database sharding is actually a shared-nothing form of database clustering. Shared-nothing architecture means that each node or server is independent from each other. In this case, no server will serve as the ``master''.
+
+Compared with shared-nothing architecture, shared-disk architecture means that data is stored in the central server and other servers or nodes access the data via this central ``master'' node.
+
+
+\section{Critical Thinking}
+
+Here are the pros and cons of clustering in databases.\cite{caleb}
+
+Pros:
+\begin{enumerate}[1.]\setlength{\itemsep}{-0.1cm}\setlength{\topsep}{0pt}
+\item With clustering, one database can have several backups.
+\item When there are too many requests, clustering can reduce the workload of databases.
+\item Clustering can improve the availability of databases.
+\end{enumerate}
+
+Cons:
+\begin{enumerate}[1.]\setlength{\itemsep}{-0.1cm}\setlength{\topsep}{0pt}
+\item When using the shared-nothing architecture, it is hard to maintain ACID properties.
+\item When using the shared-disk architecture, if master nodes is down, then slave nodes will not work properly.
+\end{enumerate}
+
+
+\newpage
+
+\begin{center}
+{\textbf{
+Page \#2}}
+\end{center}
+
+\section{Question}
+
+Distribution and clustering are widely used today to offer better services when handling bigger data. But are the two things the same? Are there any differences between clusterring and distribution?
+
+\section{Method}
+
+{\emph{Describe how you are going to answer your own question stated above.}}
+
+\section{Analysis and Discussion}
+
+The meanings, pros and cons of clustering are dicussed in the last page, but what is distribution?
+
+Distribution refers to making different service modules work on different nodes, and providing services through collaborative work.
+
+Distribution is not the same as clustering. They're different. Distribution is in parallel, while the clusters are connected in series.
+
+Distribution refers to the distribution of different jobs in different nodes while cluster refers to the combination of several servers to finish the same job. So the organization of distributed networks will be more loose than clusters.
+
+On the other hand, the goal of distribution is to shorten the execution time of a single task while clusters improve efficiency by increasing the number of similar tasks executed per unit time.
+
+For example, a factory wants to improve the efficiency to produce the products. The company can either hire more workers who independently produce the products or hire more workers who can coorperate to reduce the time needed for producing one product.
+
+\end{document}
