@@ -91,17 +91,17 @@ CREATE TABLE IF NOT EXISTS `HR_Migration_System`.`Plays` (
   INDEX `ee_id_idx` (`ee_id` ASC),
   INDEX `er_id_idx` (`er_id` ASC),
   INDEX `hr_id_idx` (`hr_id` ASC),
-  CONSTRAINT `ee_id`
+  CONSTRAINT `ee_id2`
     FOREIGN KEY (`ee_id`)
     REFERENCES `HR_Migration_System`.`Interviewee` (`interviewee_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `er_id`
+  CONSTRAINT `er_id2`
     FOREIGN KEY (`er_id`)
     REFERENCES `HR_Migration_System`.`Interviewer` (`interviewer_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `hr_id`
+  CONSTRAINT `hr_id2`
     FOREIGN KEY (`hr_id`)
     REFERENCES `HR_Migration_System`.`HR_manager` (`hr_id`)
     ON DELETE NO ACTION
@@ -144,12 +144,12 @@ CREATE TABLE IF NOT EXISTS `HR_Migration_System`.`Applies` (
   `pos_id` INT NOT NULL,
   PRIMARY KEY (`ee_id`, `pos_id`),
   INDEX `pos_id_idx` (`pos_id` ASC),
-  CONSTRAINT `ee_id`
+  CONSTRAINT `ee_id3`
     FOREIGN KEY (`ee_id`)
     REFERENCES `HR_Migration_System`.`Interviewee` (`interviewee_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `pos_id`
+  CONSTRAINT `pos_id3`
     FOREIGN KEY (`pos_id`)
     REFERENCES `HR_Migration_System`.`Position` (`position_id`)
     ON DELETE NO ACTION
@@ -169,12 +169,12 @@ CREATE TABLE IF NOT EXISTS `HR_Migration_System`.`Interview` (
   `score` INT NULL,
   PRIMARY KEY (`ee_id`, `er_id`),
   INDEX `er_id_idx` (`er_id` ASC),
-  CONSTRAINT `ee_id`
+  CONSTRAINT `ee_id4`
     FOREIGN KEY (`ee_id`)
     REFERENCES `HR_Migration_System`.`Interviewee` (`interviewee_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `er_id`
+  CONSTRAINT `er_id4`
     FOREIGN KEY (`er_id`)
     REFERENCES `HR_Migration_System`.`Interviewer` (`interviewer_id`)
     ON DELETE NO ACTION

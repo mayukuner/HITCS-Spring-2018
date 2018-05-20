@@ -1,0 +1,18 @@
+# triggers
+
+user AFTERINSERT create corresponding plays
+user BEFOREDELETE 
+
+
+# procedures
+
+add\_role(username, role)
+add\_applies(username, pos\_id)
+add\_interview(ee\_name, er\_name, date, pos\_id)
+
+# functions
+
+get\_role\_id(username, role)
+get\_interviews\_for\_ee(username, start=today, end=today)
+get\_interviews\_for\_er(username, start=today, end=today)
+get\_total\_score(ee\_name, pos\_id)
