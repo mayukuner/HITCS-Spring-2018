@@ -1,7 +1,0 @@
-﻿  test.cpp
-e:\hitcs-spring-2018\computer networks\exp\exp1\test\test\test.cpp(66): warning C4101: “dwThreadID”: 未引用的局部变量
-e:\hitcs-spring-2018\computer networks\exp\exp1\test\test\test.cpp(259): warning C4018: “<”: 有符号/无符号不匹配
-e:\hitcs-spring-2018\computer networks\exp\exp1\test\test\test.cpp(260): warning C4474: printf: 格式字符串中传递的参数太多
-  e:\hitcs-spring-2018\computer networks\exp\exp1\test\test\test.cpp(260): note: 占位符和其参数预计 0 可变参数，但提供的却是 5 参数
-e:\hitcs-spring-2018\computer networks\exp\exp1\test\test\test.cpp(169): warning C4101: “clientAddr”: 未引用的局部变量
-  test.vcxproj -> E:\HITCS-Spring-2018\Computer Networks\exp\exp1\test\Debug\test.exe

@@ -1,0 +1,8 @@
+﻿  server.cpp
+e:\hitcs-spring-2018\computer networks\lab\lab2\client\server\server.cpp(137): warning C4309: “=”: 截断常量值
+e:\hitcs-spring-2018\computer networks\lab\lab2\client\server\server.cpp(175): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: 参见“strcpy”的声明
+e:\hitcs-spring-2018\computer networks\lab\lab2\client\server\server.cpp(321): warning C4309: “=”: 截断常量值
+e:\hitcs-spring-2018\computer networks\lab\lab2\client\server\server.cpp(386): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: 参见“strcpy”的声明
+  server.vcxproj -> E:\HITCS-Spring-2018\Computer Networks\lab\lab2\client\Debug\server.exe
